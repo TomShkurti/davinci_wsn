@@ -94,12 +94,17 @@ int main(int argc, char **argv) {
 	return 0;
 }
 
-bool exec_position(const trajectory_msgs::JointTrajectoryPoint& in_point, double & elapsed_time){
+bool exec_position(const trajectory_msgs::JointTrajectoryPoint& in_point, const trajectory_msgs::JointTrajectoryPoint& prev_point, double & elapsed_time){
 	double input_gtime = in_point.time_from_start.toSec();
 	std::vector<double> input_jnts = in_point.positions;
+	std::vector<double> current_jnts = prev_point.positions;
 	
 	if(input_jnts.size() != 14){
 		ROS_ERROR("DaVinci trajectory points should have 14 joints, and this one has %lu!", input_jnts.size());
+		return false;
+	}
+	if(current_jnts.size() != 14){
+		ROS_ERROR("DaVinci trajectory points should have 14 joints, and the last one has %lu!", current_jnts.size());
 		return false;
 	}
 	
@@ -122,7 +127,7 @@ bool exec_position(const trajectory_msgs::JointTrajectoryPoint& in_point, double
 		elapsed_time
 	);
 	
-	std::vector<std::vector<double> > start_configuration = get_robot_pos();
+	std::vector<std::vector<double> > start_configuration = expand_joint_list(current_jnts);
 	std::vector<std::vector<double> > end_configuration = expand_joint_list(input_jnts);
 	
 	double old_elapsed_time = elapsed_time;
@@ -148,6 +153,7 @@ bool exec_position(const trajectory_msgs::JointTrajectoryPoint& in_point, double
 	return true;
 }
 
+//Currently not used, but kept because it may be useful elsewhere.
 std::vector<std::vector<double> > get_robot_pos(){
 	g_fresh_pos = false;
 	while(!g_fresh_pos){
@@ -228,8 +234,17 @@ void CB_execute(
 	
 	double elapsed_time = 0.0;
 	
-	for(int i = 0; i < goal->trajectory.points.size(); i++){
-		if(!exec_position(goal->trajectory.points[i], elapsed_time)){
+	if(goal->trajectory.points.size() < 2){
+		ROS_ERROR("Trajectory %u is too small! Aborting.", goal->traj_id);
+		davinci_traj_streamer::trajResult r;
+		r.return_val = 0;
+		r.traj_id = goal->traj_id;
+		server->setAborted();
+		return;
+	}
+	
+	for(int i = 1; i < goal->trajectory.points.size(); i++){
+		if(!exec_position(goal->trajectory.points[i], goal->trajectory.points[i-1], elapsed_time)){
 			davinci_traj_streamer::trajResult r;
 			r.return_val = 0;
 			r.traj_id = goal->traj_id;
