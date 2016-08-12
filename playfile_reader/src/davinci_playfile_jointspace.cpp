@@ -6,21 +6,6 @@
 
 #include <davinci_traj_streamer/trajAction.h>
 
-// Read a list of CSV records.
-std::istream& operator >> (std::istream & ins, data_t & data){
-	// make sure that the returned data only contains the CSV data we read here
-	data.clear();
-
-	// For every record we can read from the file, append it to our resulting data
-	record_t record;
-	while (ins >> record){
-		data.push_back(record);
-	}
-
-	// Again, return the argument stream as required for this kind of input stream overload.
-	return ins;
-}
-
 int main(int argc, char **argv) {
 	//Set up our node.
 	ros::init(argc, argv, "playfile_jointspace");

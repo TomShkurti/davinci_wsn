@@ -7,7 +7,7 @@
 #include <trajectory_msgs/JointTrajectoryPoint.h>
 #include <davinci_traj_streamer/trajAction.h>
 
-const std::string joint_names[13] = {
+const std::string JOINT_NAMES[13] = {
 	"joint1_position_controller"	,
 	"joint2_position_controller"	,
 	"joint2_1_position_controller"	,
@@ -25,7 +25,7 @@ const std::string joint_names[13] = {
 //And of course, despite representing the same exact joints, the joint names
 //that come out of the state message are DIFFERENT from the ones the
 //controllers answer to...
-const std::string feedback_names[13] = {
+const std::string FEEDBACK_NAMES[13] = {
 	"outer_yaw_joint"			,
 	"outer_pitch_joint"			,
 	"outer_pitch_joint_1" 			,
@@ -41,12 +41,13 @@ const std::string feedback_names[13] = {
 	"outer_wrist_open_angle_joint_mimic"
 	
 };
-const double dt_traj = 0.01;
 
-ros::Publisher publishers[2][13];
-actionlib::SimpleActionServer<davinci_traj_streamer::trajAction> * server_gp;
-sensor_msgs::JointState states;
-bool fresh_pos;
+const double DT_TRAJ = 0.01;
+
+ros::Publisher g_publishers[2][13];
+actionlib::SimpleActionServer<davinci_traj_streamer::trajAction> * g_server;
+sensor_msgs::JointState g_states;
+bool g_fresh_pos;
 
 void CB_execute(
 	const davinci_traj_streamer::trajGoalConstPtr& goal,
@@ -70,8 +71,8 @@ int main(int argc, char **argv) {
 	
 	//Set up the publishers.
 	for(int i = 0; i < 13; i++){
-		publishers[0][i] = nh.advertise<std_msgs::Float64>("/davinci/one_" + joint_names[i] + "/command", 1, true); 
-		publishers[1][i] = nh.advertise<std_msgs::Float64>("/davinci/two_" + joint_names[i] + "/command", 1, true);
+		g_publishers[0][i] = nh.advertise<std_msgs::Float64>("/davinci/one_" + JOINT_NAMES[i] + "/command", 1, true); 
+		g_publishers[1][i] = nh.advertise<std_msgs::Float64>("/davinci/two_" + JOINT_NAMES[i] + "/command", 1, true);
 	}
 	
 	//Set up the subscriber
@@ -80,7 +81,7 @@ int main(int argc, char **argv) {
 	
 	//Begin offering the service
 	actionlib::SimpleActionServer<davinci_traj_streamer::trajAction> server(nh, "trajActionServer", false);
-	server_gp = & server;
+	g_server = & server;
 	server.registerGoalCallback(&CB_goal);
 	server.start();
 	
@@ -126,8 +127,8 @@ bool exec_position(const trajectory_msgs::JointTrajectoryPoint& in_point, double
 	
 	double old_elapsed_time = elapsed_time;
 	while(elapsed_time < input_gtime){
-		ros::Duration wait_time(dt_traj);
-		elapsed_time = elapsed_time + dt_traj;
+		ros::Duration wait_time(DT_TRAJ);
+		elapsed_time = elapsed_time + DT_TRAJ;
 		std_msgs::Float64 messages[2][13];
 		double parametric_value = (elapsed_time - old_elapsed_time) / (input_gtime - old_elapsed_time);
 		for(int i = 0; i < 13; i++){
@@ -137,7 +138,7 @@ bool exec_position(const trajectory_msgs::JointTrajectoryPoint& in_point, double
 		//ROS_ERROR("Shoulder goal is %f", messages[1][0].data);
 		for(int i = 0; i < 2; i++){
 			for(int j = 0; j < 13; j++){
-				publishers[i][j].publish(messages[i][j]);
+				g_publishers[i][j].publish(messages[i][j]);
 			}
 		}
 		ros::spinOnce();
@@ -148,8 +149,8 @@ bool exec_position(const trajectory_msgs::JointTrajectoryPoint& in_point, double
 }
 
 std::vector<std::vector<double> > get_robot_pos(){
-	fresh_pos = false;
-	while(!fresh_pos){
+	g_fresh_pos = false;
+	while(!g_fresh_pos){
 		ros::spinOnce();
 		ros::Duration(0.01).sleep();
 	}
@@ -160,8 +161,8 @@ std::vector<std::vector<double> > get_robot_pos(){
 	
 	//Read the robopositions
 	for(int i = 0; i < 13; i++){
-		Davinci_fwd_solver::get_jnt_val_by_name("one_" + feedback_names[i], states, rp[0][i]);
-		Davinci_fwd_solver::get_jnt_val_by_name("two_" + feedback_names[i], states, rp[1][i]);
+		Davinci_fwd_solver::get_jnt_val_by_name("one_" + FEEDBACK_NAMES[i], g_states, rp[0][i]);
+		Davinci_fwd_solver::get_jnt_val_by_name("two_" + FEEDBACK_NAMES[i], g_states, rp[1][i]);
 	}
 	
 	/*ROS_INFO("Arm two is at: ");
@@ -210,13 +211,13 @@ void CB_goal(){
 	
 	//I guess you could just run the whole trajectory in
 	//here, but I've kept the execute function.
-	CB_execute(server_gp->acceptNewGoal(), server_gp);
+	CB_execute(g_server->acceptNewGoal(), g_server);
 	
 	//These SUPPOSEDLY don't do anything, but their
 	//existance somehow prevents a very serious issue.
-	server_gp->isPreemptRequested();
-	server_gp->isActive();
-	server_gp->isNewGoalAvailable();
+	g_server->isPreemptRequested();
+	g_server->isActive();
+	g_server->isNewGoalAvailable();
 }
 
 void CB_execute(
@@ -246,7 +247,7 @@ void CB_execute(
 }
 
 void CB_update(const sensor_msgs::JointState::ConstPtr& incoming){
-	fresh_pos = true;
-	states = *incoming;
+	g_fresh_pos = true;
+	g_states = *incoming;
 	return;
 }
