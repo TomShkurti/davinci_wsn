@@ -95,7 +95,8 @@ int main(int argc, char **argv) {
 }
 
 bool exec_position(const trajectory_msgs::JointTrajectoryPoint& in_point, const trajectory_msgs::JointTrajectoryPoint& prev_point, double & elapsed_time){
-	double input_gtime = in_point.time_from_start.toSec();
+	//Give us at least one tick in which to execute the trajectory
+	double input_gtime = max(in_point.time_from_start.toSec(), elapsed_time + DT_TRAJ);
 	std::vector<double> input_jnts = in_point.positions;
 	std::vector<double> current_jnts = prev_point.positions;
 	

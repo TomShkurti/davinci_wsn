@@ -1,0 +1,1 @@
+The playfile readers are kind of an end-user application, but are referenced by a lot of other scripts, etc. for tasks and are not something a surgeon would actually use. Therefore, I'd suggest moving them into some area with other setup utilities.
