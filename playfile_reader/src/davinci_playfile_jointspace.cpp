@@ -104,10 +104,7 @@ int main(int argc, char **argv) {
 	ROS_INFO("Sending trajectory with ID %u", tgoal.traj_id);
 	action_client.sendGoal(tgoal);
 	
-	//In theory, the following function call does absolutely nothing.
-	//In practice, it prevents an intermittent bug that rarely makes the
-	//action server unusable.
-	action_client.getState();
+	//action_client.getState();
 	
 	//Wait for it to finish.
 	while(!action_client.waitForResult(ros::Duration(total_wait_time + 2.0)) && ros::ok()){

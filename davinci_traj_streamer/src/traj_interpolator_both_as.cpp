@@ -7,6 +7,9 @@
 #include <trajectory_msgs/JointTrajectoryPoint.h>
 #include <davinci_traj_streamer/trajAction.h>
 
+///Test, test.
+///Test.
+
 const std::string JOINT_NAMES[13] = {
 	"joint1_position_controller"	,
 	"joint2_position_controller"	,
@@ -51,7 +54,7 @@ bool g_fresh_pos;
 
 void CB_execute(
 	const davinci_traj_streamer::trajGoalConstPtr& goal,
-	actionlib::SimpleActionServer<davinci_traj_streamer::trajAction>* server
+	actionlib::SimpleActionServer<davinci_traj_streamer::trajAction> * server
 );
 
 void CB_update(const sensor_msgs::JointState::ConstPtr& incoming);
@@ -220,11 +223,9 @@ void CB_goal(){
 	//here, but I've kept the execute function.
 	CB_execute(g_server->acceptNewGoal(), g_server);
 	
-	//These SUPPOSEDLY don't do anything, but their
-	//existance somehow prevents a very serious issue.
-	g_server->isPreemptRequested();
-	g_server->isActive();
-	g_server->isNewGoalAvailable();
+	//g_server->isPreemptRequested();
+	//g_server->isActive();
+	//g_server->isNewGoalAvailable();
 }
 
 void CB_execute(
