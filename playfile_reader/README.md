@@ -18,9 +18,9 @@ All three readers can either read playfiles directly from a file path
 
 `roslaunch playfile_reader playfile_jointspace ~/ros_ws/absolute/path/to/jointfile.jsp`
 	
-`cd ~/ros_ws
+<code>cd ~/ros_ws
 
-roslaunch playfile_reader playfile_jointspace relative/path/to/jointfile.jsp`
+roslaunch playfile_reader playfile_jointspace relative/path/to/jointfile.jsp</code>
 
 or from a ROS package
 
