@@ -4,7 +4,7 @@ Node to read a file encoding desired dual-arm joint-space motions, convert to a 
 
 Playfile_reader_jointspace takes in a list of successive joint angles ("records") as a Joint Space File.
 
-Additional information on the Joint Space File format can be found in <a href="Joint_Grimoire.pdf">Joint_Grimoire.pdf</a>, section Joint Space File Format; example .jsp files are in <a href="/play/jsp">playfile_reader/play/jsp</a>.
+Additional information on the Joint Space File format can be found in <a href="Joint_Grimoire.pdf">Joint_Grimoire.pdf</a>, section Joint Space File Format; example .jsp files are in <a href="play/jsp">playfile_reader/play/jsp</a>.
 
 Playfile_reader_cartspace and playfile_reader_cameraspace both take in the positions and rotations of the DaVinci grippers, using inverse kinematics to produce and execute a full trajectory.
 
