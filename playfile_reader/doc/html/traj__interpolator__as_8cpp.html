@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>davinci_traj_streamer: File List</title>
+<title>davinci_traj_streamer: src/traj_interpolator_as.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,7 +66,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
-      <li class="current"><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="files.html"><span>File&#160;List</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -81,7 +81,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('files.html','');});
+$(document).ready(function(){initNavTree('traj__interpolator__as_8cpp.html','');});
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -99,21 +99,42 @@ $(document).ready(function(){initNavTree('files.html','');});
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">File List</div>  </div>
+<div class="title">traj_interpolator_as.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock">Here is a list of all documented files with brief descriptions:</div><div class="directory">
-<div class="levels">[detail level <span onclick="javascript:toggleLevel(1);">1</span><span onclick="javascript:toggleLevel(2);">2</span>]</div><table class="directory">
-<tr id="row_0_" class="even"><td class="entry"><img id="arr_0_" src="ftv2mlastnode.png" alt="\" width="16" height="22" onclick="toggleFolder('0_')"/><img id="img_0_" src="ftv2folderopen.png" alt="-" width="24" height="22" onclick="toggleFolder('0_')"/><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html" target="_self">src</a></td><td class="desc"></td></tr>
-<tr id="row_0_0_"><td class="entry"><img src="ftv2blank.png" alt="&#160;" width="16" height="22" /><img src="ftv2lastnode.png" alt="\" width="16" height="22" /><img src="ftv2doc.png" alt="*" width="24" height="22" /><a class="el" href="traj__interpolator__as_8cpp.html" target="_self">traj_interpolator_as.cpp</a></td><td class="desc">Trajectory streamer </td></tr>
+
+<p>Trajectory streamer.  
+<a href="#details">More...</a></p>
+<div class="textblock"><code>#include &lt;davinci_traj_streamer/davinci_traj_streamer.h&gt;</code><br/>
+<code>#include &lt;actionlib/server/simple_action_server.h&gt;</code><br/>
+<code>#include &lt;davinci_traj_streamer/trajAction.h&gt;</code><br/>
+<code>#include &lt;trajectory_msgs/JointTrajectoryPoint.h&gt;</code><br/>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_traj_action_server.html">TrajActionServer</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>main</b> (int argc, char **argv)</td></tr>
+<tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-</div><!-- directory -->
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Trajectory streamer. </p>
+<p>Run in bkg, provides trajectory interpolation for the DaVinci unit</p>
+<p>Recommended to use with playfile_reader_jointspace, playfile_reader_cameraspace, or playfile_reader_cartspace. </p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="traj__interpolator__as_8cpp.html">traj_interpolator_as.cpp</a></li>
     <li class="footer">Generated on Sun Aug 14 2016 16:42:53 for davinci_traj_streamer by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>

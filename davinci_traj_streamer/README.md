@@ -1,3 +1,5 @@
+<b>Kind of needs a complete rewrite.</b>
+
 wsn pgm to receive Davinci trajectories and interpolate them smoothly as commands to Davinci;
 
 Sept 2015
@@ -24,7 +26,3 @@ At this point, the commands are published as a joint-state publisher, which driv
 Possible extension to driving a gazebo model with a davinci_cmd message
 
 values for dt_traj and max velocities are set in header, davinci_traj_streamer.h
-
-
-
-

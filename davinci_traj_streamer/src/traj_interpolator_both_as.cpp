@@ -7,6 +7,14 @@
 #include <trajectory_msgs/JointTrajectoryPoint.h>
 #include <davinci_traj_streamer/trajAction.h>
 
+/** \file traj_interpolator_as.cpp
+*@brief Trajectory streamer
+*
+*Run in bkg, provides trajectory interpolation for the DaVinci unit
+*
+*Recommended to use with playfile_reader_jointspace, playfile_reader_cameraspace, or playfile_reader_cartspace.
+*/
+
 //==================================================THEORY OF OPERATION====================================
 //	The trajectory interpolator as written previously suffered a serious issue where upon recieving an 
 //action, between one quarter and one sixth of the time it would immediately get stuck in a "RECALLED" state
@@ -85,6 +93,8 @@ bool exec_position(
 std::vector<std::vector<double> > expand_joint_list(const std::vector<double> & input);
 std::vector<std::vector<double> > get_robot_pos();//Not currently used, kept for archival reasons until moved to another pkg.
 
+/** @brief main funcion
+*/
 int main(int argc, char **argv) {
 	//Set up the node.
 	ros::init(argc, argv, "traj_interpolator_both_as");
