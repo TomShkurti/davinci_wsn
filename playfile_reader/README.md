@@ -4,7 +4,7 @@ Node to read a file encoding desired dual-arm joint-space motions, convert to a 
 
 Playfile_reader_jointspace takes in a list of successive joint angles ("records") as a Joint Space File.
 
-Additional information on the Joint Space File format can be found in <a href="Joint_Grimoire.pdf">Joint_Grimoire.pdf</a>, section Joint Space File Format; example .jsp files are in [playfile_reader/play/jsp].
+Additional information on the Joint Space File format can be found in <a href="Joint_Grimoire.pdf">Joint_Grimoire.pdf</a>, section Joint Space File Format; example .jsp files are in <a href="/play/jsp">playfile_reader/play/jsp</a>.
 
 Playfile_reader_cartspace and playfile_reader_cameraspace both take in the positions and rotations of the DaVinci grippers, using inverse kinematics to produce and execute a full trajectory.
 
@@ -17,9 +17,9 @@ The file is packed up as a "trajectory" message and delivered within a "goal" me
 All three readers can either read playfiles directly from a file path
 
 `roslaunch playfile_reader playfile_jointspace ~/ros_ws/absolute/path/to/jointfile.jsp`
+
 	
 <code>cd ~/ros_ws
-
 roslaunch playfile_reader playfile_jointspace relative/path/to/jointfile.jsp</code>
 
 or from a ROS package
@@ -28,14 +28,20 @@ or from a ROS package
 
 ## Example usage
 Start gazebo:
+
 `roslaunch davinci_gazebo sticky_davinci_gazebo.launch`
 
+
 Start trajectory streamer action server:
+
 `rosrun davinci_traj_streamer davinci_traj_interpolator_as`
+
 
 Run this node with package and file argument, e.g.
 to execute file testfile2.jsp, do:
+
 `rosrun playfile_reader playfile_jointspace playfile_jointspace /play/jsp/example_righthand_grabbing.jsp`
+
 
 ALTERNATIVE: Cartesian playfile. Read in a file of sequence of desired gripper poses, in Cartesian space.
 Perform IK, pack joint-space solutions into a trajectory, and send as goal to trajectory streamer action server:
