@@ -1,0 +1,87 @@
+\hypertarget{playfile__record_8h}{\section{include/playfile\-\_\-reader/playfile\-\_\-record.h File Reference}
+\label{playfile__record_8h}\index{include/playfile\-\_\-reader/playfile\-\_\-record.\-h@{include/playfile\-\_\-reader/playfile\-\_\-record.\-h}}
+}
+
+
+Utility types and functions for the playfile reader.  
+
+
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$sstream$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\-::vector$<$ double $>$ \hyperlink{playfile__record_8h_a7ddc65cc77a02b6d0a7beeb93e7ead25}{record\-\_\-t}
+\begin{DoxyCompactList}\small\item\em A list of joint positions. \end{DoxyCompactList}\item 
+typedef std\-::vector$<$ \hyperlink{playfile__record_8h_a7ddc65cc77a02b6d0a7beeb93e7ead25}{record\-\_\-t} $>$ \hyperlink{playfile__record_8h_af1cf062b1277a5ac964f401421aaced5}{data\-\_\-t}
+\begin{DoxyCompactList}\small\item\em A list of records. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\-::istream \& \hyperlink{playfile__record_8h_a79698fd62d34922f80c602541fc48cfc}{operator$>$$>$} (std\-::istream \&ins, \hyperlink{playfile__record_8h_a7ddc65cc77a02b6d0a7beeb93e7ead25}{record\-\_\-t} \&record)
+\begin{DoxyCompactList}\small\item\em Creates a record from a line in an A\-S\-C\-I\-I file. \end{DoxyCompactList}\item 
+std\-::istream \& \hyperlink{playfile__record_8h_a2f7fde5146c7121051237deee15c800f}{operator$>$$>$} (std\-::istream \&ins, \hyperlink{playfile__record_8h_af1cf062b1277a5ac964f401421aaced5}{data\-\_\-t} \&data)
+\begin{DoxyCompactList}\small\item\em Creates a data\-\_\-t from an A\-S\-C\-I\-I file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Utility types and functions for the playfile reader. 
+
+\subsection{Typedef Documentation}
+\hypertarget{playfile__record_8h_af1cf062b1277a5ac964f401421aaced5}{\index{playfile\-\_\-record.\-h@{playfile\-\_\-record.\-h}!data\-\_\-t@{data\-\_\-t}}
+\index{data\-\_\-t@{data\-\_\-t}!playfile_record.h@{playfile\-\_\-record.\-h}}
+\subsubsection[{data\-\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\-::vector$<${\bf record\-\_\-t}$>$ {\bf data\-\_\-t}}}\label{playfile__record_8h_af1cf062b1277a5ac964f401421aaced5}
+
+
+A list of records. 
+
+A working trajectory must contain at least two records (start and finish), out to any arbitrary number. \hypertarget{playfile__record_8h_a7ddc65cc77a02b6d0a7beeb93e7ead25}{\index{playfile\-\_\-record.\-h@{playfile\-\_\-record.\-h}!record\-\_\-t@{record\-\_\-t}}
+\index{record\-\_\-t@{record\-\_\-t}!playfile_record.h@{playfile\-\_\-record.\-h}}
+\subsubsection[{record\-\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\-::vector$<$double$>$ {\bf record\-\_\-t}}}\label{playfile__record_8h_a7ddc65cc77a02b6d0a7beeb93e7ead25}
+
+
+A list of joint positions. 
+
+One record contains all 14 degrees of freedom used by the two-\/armed Da\-Vinci configuration. 
+
+\subsection{Function Documentation}
+\hypertarget{playfile__record_8h_a79698fd62d34922f80c602541fc48cfc}{\index{playfile\-\_\-record.\-h@{playfile\-\_\-record.\-h}!operator$>$$>$@{operator$>$$>$}}
+\index{operator$>$$>$@{operator$>$$>$}!playfile_record.h@{playfile\-\_\-record.\-h}}
+\subsubsection[{operator$>$$>$}]{\setlength{\rightskip}{0pt plus 5cm}std\-::istream\& operator$>$$>$ (
+\begin{DoxyParamCaption}
+\item[{std\-::istream \&}]{ins, }
+\item[{{\bf record\-\_\-t} \&}]{record}
+\end{DoxyParamCaption}
+)}}\label{playfile__record_8h_a79698fd62d34922f80c602541fc48cfc}
+
+
+Creates a record from a line in an A\-S\-C\-I\-I file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ins} & input\-: istream contining a line following the J\-S\-P or C\-S\-P protocols \\
+\hline
+{\em data} & output\-: record\-\_\-t created from that file \\
+\hline
+\end{DoxyParams}
+\hypertarget{playfile__record_8h_a2f7fde5146c7121051237deee15c800f}{\index{playfile\-\_\-record.\-h@{playfile\-\_\-record.\-h}!operator$>$$>$@{operator$>$$>$}}
+\index{operator$>$$>$@{operator$>$$>$}!playfile_record.h@{playfile\-\_\-record.\-h}}
+\subsubsection[{operator$>$$>$}]{\setlength{\rightskip}{0pt plus 5cm}std\-::istream\& operator$>$$>$ (
+\begin{DoxyParamCaption}
+\item[{std\-::istream \&}]{ins, }
+\item[{{\bf data\-\_\-t} \&}]{data}
+\end{DoxyParamCaption}
+)}}\label{playfile__record_8h_a2f7fde5146c7121051237deee15c800f}
+
+
+Creates a data\-\_\-t from an A\-S\-C\-I\-I file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ins} & input\-: istream pointing to an A\-S\-C\-I\-I file following the J\-S\-P or C\-S\-P protocols \\
+\hline
+{\em data} & output\-: data\-\_\-t created from that file \\
+\hline
+\end{DoxyParams}

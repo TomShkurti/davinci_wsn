@@ -44,7 +44,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -67,6 +66,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li class="current"><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('files.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -105,9 +105,11 @@ $(document).ready(function(){initNavTree('files.html','');});
 <div class="contents">
 <div class="textblock">Here is a list of all documented files with brief descriptions:</div><div class="directory">
 <div class="levels">[detail level <span onclick="javascript:toggleLevel(1);">1</span><span onclick="javascript:toggleLevel(2);">2</span><span onclick="javascript:toggleLevel(3);">3</span>]</div><table class="directory">
-<tr id="row_0_" class="even"><td class="entry"><img id="arr_0_" src="ftv2mlastnode.png" alt="\" width="16" height="22" onclick="toggleFolder('0_')"/><img id="img_0_" src="ftv2folderopen.png" alt="-" width="24" height="22" onclick="toggleFolder('0_')"/><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html" target="_self">include</a></td><td class="desc"></td></tr>
-<tr id="row_0_0_"><td class="entry"><img src="ftv2blank.png" alt="&#160;" width="16" height="22" /><img id="arr_0_0_" src="ftv2mlastnode.png" alt="\" width="16" height="22" onclick="toggleFolder('0_0_')"/><img id="img_0_0_" src="ftv2folderopen.png" alt="-" width="24" height="22" onclick="toggleFolder('0_0_')"/><a class="el" href="dir_22c7987a049e73b863b4bfc65c48fdba.html" target="_self">playfile_reader</a></td><td class="desc"></td></tr>
-<tr id="row_0_0_0_" class="even"><td class="entry"><img src="ftv2blank.png" alt="&#160;" width="16" height="22" /><img src="ftv2blank.png" alt="&#160;" width="16" height="22" /><img src="ftv2lastnode.png" alt="\" width="16" height="22" /><a href="playfile__record_8h_source.html"><img src="ftv2doc.png" alt="*" width="24" height="22" /></a><b>playfile_record.h</b></td><td class="desc"></td></tr>
+<tr id="row_0_" class="even"><td class="entry"><img id="arr_0_" src="ftv2mnode.png" alt="o" width="16" height="22" onclick="toggleFolder('0_')"/><img id="img_0_" src="ftv2folderopen.png" alt="-" width="24" height="22" onclick="toggleFolder('0_')"/><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html" target="_self">include</a></td><td class="desc"></td></tr>
+<tr id="row_0_0_"><td class="entry"><img src="ftv2vertline.png" alt="|" width="16" height="22" /><img id="arr_0_0_" src="ftv2mlastnode.png" alt="\" width="16" height="22" onclick="toggleFolder('0_0_')"/><img id="img_0_0_" src="ftv2folderopen.png" alt="-" width="24" height="22" onclick="toggleFolder('0_0_')"/><a class="el" href="dir_22c7987a049e73b863b4bfc65c48fdba.html" target="_self">playfile_reader</a></td><td class="desc"></td></tr>
+<tr id="row_0_0_0_" class="even"><td class="entry"><img src="ftv2vertline.png" alt="|" width="16" height="22" /><img src="ftv2blank.png" alt="&#160;" width="16" height="22" /><img src="ftv2lastnode.png" alt="\" width="16" height="22" /><a href="playfile__record_8h_source.html"><img src="ftv2doc.png" alt="*" width="24" height="22" /></a><a class="el" href="playfile__record_8h.html" target="_self">playfile_record.h</a></td><td class="desc">Utility types and functions for the playfile reader </td></tr>
+<tr id="row_1_"><td class="entry"><img id="arr_1_" src="ftv2mlastnode.png" alt="\" width="16" height="22" onclick="toggleFolder('1_')"/><img id="img_1_" src="ftv2folderopen.png" alt="-" width="24" height="22" onclick="toggleFolder('1_')"/><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html" target="_self">src</a></td><td class="desc"></td></tr>
+<tr id="row_1_0_" class="even"><td class="entry"><img src="ftv2blank.png" alt="&#160;" width="16" height="22" /><img src="ftv2lastnode.png" alt="\" width="16" height="22" /><img src="ftv2doc.png" alt="*" width="24" height="22" /><a class="el" href="davinci__playfile__jointspace_8cpp.html" target="_self">davinci_playfile_jointspace.cpp</a></td><td class="desc">Top-level playfile reader, JSP version. Takes in a jointspace file and sends commands to a traj streamer </td></tr>
 </table>
 </div><!-- directory -->
 </div><!-- contents -->
@@ -115,7 +117,7 @@ $(document).ready(function(){initNavTree('files.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Aug 14 2016 14:37:37 for playfile_reader by
+    <li class="footer">Generated on Sun Aug 14 2016 15:54:50 for playfile_reader by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

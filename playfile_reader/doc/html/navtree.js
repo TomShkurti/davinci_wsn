@@ -1,16 +1,20 @@
 var NAVTREE =
 [
   [ "playfile_reader", "index.html", [
-    [ "playfile_reader", "md__r_e_a_d_m_e.html", null ],
     [ "Files", null, [
-      [ "File List", "files.html", "files" ]
+      [ "File List", "files.html", "files" ],
+      [ "File Members", "globals.html", [
+        [ "All", "globals.html", null ],
+        [ "Functions", "globals_func.html", null ],
+        [ "Typedefs", "globals_type.html", null ]
+      ] ]
     ] ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"dir_22c7987a049e73b863b4bfc65c48fdba.html"
+"davinci__playfile__jointspace_8cpp.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

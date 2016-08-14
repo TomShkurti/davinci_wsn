@@ -6,12 +6,31 @@
 
 #include <davinci_traj_streamer/trajAction.h>
 
-/*! \brief Top-level playfile reader, JSP version. Takes in a jointspace file and sends commands to davinci_traj_streamer_as
+/** \file davinci_playfile_jointspace.cpp
+*@brief Top-level playfile reader, JSP version. Takes in a jointspace file and sends commands to a traj streamer.
 *
+*Reads a joint-space file as described in <a href="../../Joint_Grimoire.pdf">Joint_Grimoire.pdf</a>.
 *
-* TODO: LONGER DESCRIPTION
+*The file is read, checked for size consistency (though not for joint-range viability, nor speed viability)
+*The file is packed up as a "trajectory" message and delivered within a "goal" message to the trajectory-streamer action server.
+*
+*All three readers can either read playfiles directly from a file path
+*
+*`roslaunch playfile_reader playfile_jointspace ~/ros_ws/absolute/path/to/jointfile.jsp`
+*
+*	
+*<code>cd ~/ros_ws
+*roslaunch playfile_reader playfile_jointspace relative/path/to/jointfile.jsp</code>
+*
+*or from a ROS package
+*
+*`roslaunch playfile_reader playfile_jointspace generic_package /play/jsp/jointfile.jsp`
+*
+*Recommended to use with davinci_traj_streamer_as.
 */
 
+/** @brief main funcion
+*/
 int main(int argc, char **argv) {
 	//Set up our node.
 	ros::init(argc, argv, "playfile_jointspace");

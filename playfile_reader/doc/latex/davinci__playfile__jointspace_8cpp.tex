@@ -1,0 +1,37 @@
+\hypertarget{davinci__playfile__jointspace_8cpp}{\section{src/davinci\-\_\-playfile\-\_\-jointspace.cpp File Reference}
+\label{davinci__playfile__jointspace_8cpp}\index{src/davinci\-\_\-playfile\-\_\-jointspace.\-cpp@{src/davinci\-\_\-playfile\-\_\-jointspace.\-cpp}}
+}
+
+
+Top-\/level playfile reader, J\-S\-P version. Takes in a jointspace file and sends commands to a traj streamer.  
+
+
+{\ttfamily \#include $<$ros/ros.\-h$>$}\\*
+{\ttfamily \#include $<$ros/package.\-h$>$}\\*
+{\ttfamily \#include $<$actionlib/client/simple\-\_\-action\-\_\-client.\-h$>$}\\*
+{\ttfamily \#include $<$playfile\-\_\-reader/playfile\-\_\-record.\-h$>$}\\*
+{\ttfamily \#include $<$davinci\-\_\-traj\-\_\-streamer/traj\-Action.\-h$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{davinci__playfile__jointspace_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{int \hyperlink{davinci__playfile__jointspace_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)}\label{davinci__playfile__jointspace_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}
+
+\begin{DoxyCompactList}\small\item\em main funcion \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Top-\/level playfile reader, J\-S\-P version. Takes in a jointspace file and sends commands to a traj streamer. Reads a joint-\/space file as described in \href{../../Joint_Grimoire.pdf}{\tt Joint\-\_\-\-Grimoire.\-pdf}.
+
+The file is read, checked for size consistency (though not for joint-\/range viability, nor speed viability) The file is packed up as a \char`\"{}trajectory\char`\"{} message and delivered within a \char`\"{}goal\char`\"{} message to the trajectory-\/streamer action server.
+
+All three readers can either read playfiles directly from a file path
+
+{\ttfamily roslaunch playfile\-\_\-reader playfile\-\_\-jointspace $\sim$/ros\-\_\-ws/absolute/path/to/jointfile.jsp}
+
+{\ttfamily cd $\sim$/ros\-\_\-ws roslaunch playfile\-\_\-reader playfile\-\_\-jointspace relative/path/to/jointfile.\-jsp}
+
+or from a R\-O\-S package
+
+{\ttfamily roslaunch playfile\-\_\-reader playfile\-\_\-jointspace generic\-\_\-package /play/jsp/jointfile.jsp}
+
+Recommended to use with davinci\-\_\-traj\-\_\-streamer\-\_\-as. 

@@ -1,0 +1,92 @@
+\hypertarget{davinci__playfile__cameraspace_8cpp}{\section{src/davinci\-\_\-playfile\-\_\-cameraspace.cpp File Reference}
+\label{davinci__playfile__cameraspace_8cpp}\index{src/davinci\-\_\-playfile\-\_\-cameraspace.\-cpp@{src/davinci\-\_\-playfile\-\_\-cameraspace.\-cpp}}
+}
+{\ttfamily \#include $<$ros/ros.\-h$>$}\\*
+{\ttfamily \#include $<$ros/package.\-h$>$}\\*
+{\ttfamily \#include $<$davinci\-\_\-kinematics/davinci\-\_\-joint\-\_\-publisher.\-h$>$}\\*
+{\ttfamily \#include $<$davinci\-\_\-kinematics/davinci\-\_\-kinematics.\-h$>$}\\*
+{\ttfamily \#include $<$davinci\-\_\-traj\-\_\-streamer/davinci\-\_\-traj\-\_\-streamer.\-h$>$}\\*
+{\ttfamily \#include $<$tf/transform\-\_\-listener.\-h$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$sstream$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$Eigen/\-Eigen$>$}\\*
+{\ttfamily \#include $<$Eigen/\-Dense$>$}\\*
+{\ttfamily \#include $<$Eigen/\-Geometry$>$}\\*
+{\ttfamily \#include $<$actionlib/client/simple\-\_\-action\-\_\-client.\-h$>$}\\*
+{\ttfamily \#include $<$actionlib/client/terminal\-\_\-state.\-h$>$}\\*
+{\ttfamily \#include $<$davinci\-\_\-traj\-\_\-streamer/traj\-Action.\-h$>$}\\*
+{\ttfamily \#include $<$eigen3/\-Eigen/src/\-Core/\-Matrix.\-h$>$}\\*
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef vector$<$ double $>$ \hyperlink{davinci__playfile__cameraspace_8cpp_a7a38449d6f5fac397bc68fa0ae96a84a}{record\-\_\-t}
+\item 
+typedef vector$<$ \hyperlink{playfile__record_8h_a7ddc65cc77a02b6d0a7beeb93e7ead25}{record\-\_\-t} $>$ \hyperlink{davinci__playfile__cameraspace_8cpp_a8b91da55526d5269520863a044c08b3e}{data\-\_\-t}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Eigen\-::\-Affine3d \hyperlink{davinci__playfile__cameraspace_8cpp_abd532790aaa2ae762c7c2b31699a6d24}{transform\-T\-F\-To\-Eigen} (const tf\-::\-Transform \&t)
+\item 
+istream \& \hyperlink{davinci__playfile__cameraspace_8cpp_a2b6b7d6ddc6e0fd08ca427a48fb78c61}{operator$>$$>$} (istream \&ins, \hyperlink{playfile__record_8h_a7ddc65cc77a02b6d0a7beeb93e7ead25}{record\-\_\-t} \&record)
+\item 
+istream \& \hyperlink{davinci__playfile__cameraspace_8cpp_a3f008b835943b8bebeca6e69bbf8ea37}{operator$>$$>$} (istream \&ins, \hyperlink{playfile__record_8h_af1cf062b1277a5ac964f401421aaced5}{data\-\_\-t} \&data)
+\item 
+void \hyperlink{davinci__playfile__cameraspace_8cpp_aaaff0b1f2a635326572d2de2b64187f0}{done\-Cb} (const actionlib\-::\-Simple\-Client\-Goal\-State \&state, const davinci\-\_\-traj\-\_\-streamer\-::traj\-Result\-Const\-Ptr \&result)
+\item 
+int \hyperlink{davinci__playfile__cameraspace_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{davinci__playfile__cameraspace_8cpp_a8b91da55526d5269520863a044c08b3e}{\index{davinci\-\_\-playfile\-\_\-cameraspace.\-cpp@{davinci\-\_\-playfile\-\_\-cameraspace.\-cpp}!data\-\_\-t@{data\-\_\-t}}
+\index{data\-\_\-t@{data\-\_\-t}!davinci_playfile_cameraspace.cpp@{davinci\-\_\-playfile\-\_\-cameraspace.\-cpp}}
+\subsubsection[{data\-\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef vector$<${\bf record\-\_\-t}$>$ {\bf data\-\_\-t}}}\label{davinci__playfile__cameraspace_8cpp_a8b91da55526d5269520863a044c08b3e}
+\hypertarget{davinci__playfile__cameraspace_8cpp_a7a38449d6f5fac397bc68fa0ae96a84a}{\index{davinci\-\_\-playfile\-\_\-cameraspace.\-cpp@{davinci\-\_\-playfile\-\_\-cameraspace.\-cpp}!record\-\_\-t@{record\-\_\-t}}
+\index{record\-\_\-t@{record\-\_\-t}!davinci_playfile_cameraspace.cpp@{davinci\-\_\-playfile\-\_\-cameraspace.\-cpp}}
+\subsubsection[{record\-\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef vector$<$double$>$ {\bf record\-\_\-t}}}\label{davinci__playfile__cameraspace_8cpp_a7a38449d6f5fac397bc68fa0ae96a84a}
+
+
+\subsection{Function Documentation}
+\hypertarget{davinci__playfile__cameraspace_8cpp_aaaff0b1f2a635326572d2de2b64187f0}{\index{davinci\-\_\-playfile\-\_\-cameraspace.\-cpp@{davinci\-\_\-playfile\-\_\-cameraspace.\-cpp}!done\-Cb@{done\-Cb}}
+\index{done\-Cb@{done\-Cb}!davinci_playfile_cameraspace.cpp@{davinci\-\_\-playfile\-\_\-cameraspace.\-cpp}}
+\subsubsection[{done\-Cb}]{\setlength{\rightskip}{0pt plus 5cm}void done\-Cb (
+\begin{DoxyParamCaption}
+\item[{const actionlib\-::\-Simple\-Client\-Goal\-State \&}]{state, }
+\item[{const davinci\-\_\-traj\-\_\-streamer\-::traj\-Result\-Const\-Ptr \&}]{result}
+\end{DoxyParamCaption}
+)}}\label{davinci__playfile__cameraspace_8cpp_aaaff0b1f2a635326572d2de2b64187f0}
+\hypertarget{davinci__playfile__cameraspace_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{\index{davinci\-\_\-playfile\-\_\-cameraspace.\-cpp@{davinci\-\_\-playfile\-\_\-cameraspace.\-cpp}!main@{main}}
+\index{main@{main}!davinci_playfile_cameraspace.cpp@{davinci\-\_\-playfile\-\_\-cameraspace.\-cpp}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}}\label{davinci__playfile__cameraspace_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}
+\hypertarget{davinci__playfile__cameraspace_8cpp_a2b6b7d6ddc6e0fd08ca427a48fb78c61}{\index{davinci\-\_\-playfile\-\_\-cameraspace.\-cpp@{davinci\-\_\-playfile\-\_\-cameraspace.\-cpp}!operator$>$$>$@{operator$>$$>$}}
+\index{operator$>$$>$@{operator$>$$>$}!davinci_playfile_cameraspace.cpp@{davinci\-\_\-playfile\-\_\-cameraspace.\-cpp}}
+\subsubsection[{operator$>$$>$}]{\setlength{\rightskip}{0pt plus 5cm}istream\& operator$>$$>$ (
+\begin{DoxyParamCaption}
+\item[{istream \&}]{ins, }
+\item[{{\bf record\-\_\-t} \&}]{record}
+\end{DoxyParamCaption}
+)}}\label{davinci__playfile__cameraspace_8cpp_a2b6b7d6ddc6e0fd08ca427a48fb78c61}
+\hypertarget{davinci__playfile__cameraspace_8cpp_a3f008b835943b8bebeca6e69bbf8ea37}{\index{davinci\-\_\-playfile\-\_\-cameraspace.\-cpp@{davinci\-\_\-playfile\-\_\-cameraspace.\-cpp}!operator$>$$>$@{operator$>$$>$}}
+\index{operator$>$$>$@{operator$>$$>$}!davinci_playfile_cameraspace.cpp@{davinci\-\_\-playfile\-\_\-cameraspace.\-cpp}}
+\subsubsection[{operator$>$$>$}]{\setlength{\rightskip}{0pt plus 5cm}istream\& operator$>$$>$ (
+\begin{DoxyParamCaption}
+\item[{istream \&}]{ins, }
+\item[{{\bf data\-\_\-t} \&}]{data}
+\end{DoxyParamCaption}
+)}}\label{davinci__playfile__cameraspace_8cpp_a3f008b835943b8bebeca6e69bbf8ea37}
+\hypertarget{davinci__playfile__cameraspace_8cpp_abd532790aaa2ae762c7c2b31699a6d24}{\index{davinci\-\_\-playfile\-\_\-cameraspace.\-cpp@{davinci\-\_\-playfile\-\_\-cameraspace.\-cpp}!transform\-T\-F\-To\-Eigen@{transform\-T\-F\-To\-Eigen}}
+\index{transform\-T\-F\-To\-Eigen@{transform\-T\-F\-To\-Eigen}!davinci_playfile_cameraspace.cpp@{davinci\-\_\-playfile\-\_\-cameraspace.\-cpp}}
+\subsubsection[{transform\-T\-F\-To\-Eigen}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\-::\-Affine3d transform\-T\-F\-To\-Eigen (
+\begin{DoxyParamCaption}
+\item[{const tf\-::\-Transform \&}]{t}
+\end{DoxyParamCaption}
+)}}\label{davinci__playfile__cameraspace_8cpp_abd532790aaa2ae762c7c2b31699a6d24}

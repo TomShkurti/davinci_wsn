@@ -44,7 +44,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -67,6 +66,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('playfile__record_8h_source.html','');}
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -103,24 +103,26 @@ $(document).ready(function(){initNavTree('playfile__record_8h_source.html','');}
 <div class="title">playfile_record.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;fstream&gt;</span></div>
+<a href="playfile__record_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;fstream&gt;</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">typedef</span> std::vector &lt;double&gt; record_t;</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">typedef</span> std::vector &lt;record_t&gt; data_t;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;std::istream&amp; operator &gt;&gt; (std::istream &amp; ins, record_t &amp; record);</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;std::istream&amp; operator &gt;&gt; (std::istream &amp; ins, data_t &amp; data);</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="playfile__record_8h.html#a7ddc65cc77a02b6d0a7beeb93e7ead25">   14</a></span>&#160;<span class="keyword">typedef</span> std::vector &lt;double&gt; <a class="code" href="playfile__record_8h.html#a7ddc65cc77a02b6d0a7beeb93e7ead25">record_t</a>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="playfile__record_8h.html#af1cf062b1277a5ac964f401421aaced5">   20</a></span>&#160;<span class="keyword">typedef</span> std::vector &lt;record_t&gt; <a class="code" href="playfile__record_8h.html#af1cf062b1277a5ac964f401421aaced5">data_t</a>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;std::istream&amp; <a class="code" href="playfile__record_8h.html#a79698fd62d34922f80c602541fc48cfc">operator &gt;&gt; </a>(std::istream &amp; ins, <a class="code" href="playfile__record_8h.html#a7ddc65cc77a02b6d0a7beeb93e7ead25">record_t</a> &amp; record);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;std::istream&amp; <a class="code" href="playfile__record_8h.html#a79698fd62d34922f80c602541fc48cfc">operator &gt;&gt; </a>(std::istream &amp; ins, <a class="code" href="playfile__record_8h.html#af1cf062b1277a5ac964f401421aaced5">data_t</a> &amp; data);</div>
+<div class="ttc" id="playfile__record_8h_html_a79698fd62d34922f80c602541fc48cfc"><div class="ttname"><a href="playfile__record_8h.html#a79698fd62d34922f80c602541fc48cfc">operator&gt;&gt;</a></div><div class="ttdeci">std::istream &amp; operator&gt;&gt;(std::istream &amp;ins, record_t &amp;record)</div><div class="ttdoc">Creates a record from a line in an ASCII file. </div><div class="ttdef"><b>Definition:</b> playfile_record.cpp:4</div></div>
+<div class="ttc" id="playfile__record_8h_html_af1cf062b1277a5ac964f401421aaced5"><div class="ttname"><a href="playfile__record_8h.html#af1cf062b1277a5ac964f401421aaced5">data_t</a></div><div class="ttdeci">std::vector&lt; record_t &gt; data_t</div><div class="ttdoc">A list of records. </div><div class="ttdef"><b>Definition:</b> playfile_record.h:20</div></div>
+<div class="ttc" id="playfile__record_8h_html_a7ddc65cc77a02b6d0a7beeb93e7ead25"><div class="ttname"><a href="playfile__record_8h.html#a7ddc65cc77a02b6d0a7beeb93e7ead25">record_t</a></div><div class="ttdeci">std::vector&lt; double &gt; record_t</div><div class="ttdoc">A list of joint positions. </div><div class="ttdef"><b>Definition:</b> playfile_record.h:14</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_22c7987a049e73b863b4bfc65c48fdba.html">playfile_reader</a></li><li class="navelem"><b>playfile_record.h</b></li>
-    <li class="footer">Generated on Sun Aug 14 2016 14:37:37 for playfile_reader by
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_22c7987a049e73b863b4bfc65c48fdba.html">playfile_reader</a></li><li class="navelem"><a class="el" href="playfile__record_8h.html">playfile_record.h</a></li>
+    <li class="footer">Generated on Sun Aug 14 2016 15:54:50 for playfile_reader by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>
