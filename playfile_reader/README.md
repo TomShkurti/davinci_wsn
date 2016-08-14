@@ -1,28 +1,42 @@
 # playfile_reader
 
-Node to read a CSV file encoding desired dual-arm joint-space motions, convert to a trajectory, and send as a goal request to the trajectory streamer action server.
-Specialized for dual-PSM davinci; assumes fixed order:
-entries 0-6 correspond to PSM1, joints 1-7; entries 7-13 are joints 1-7 of PSM2; entry 14 is desired arrival time (from start), in seconds.
-each line must contain all 15 values (in fixed order), separated by commas
+Node to read a file encoding desired dual-arm joint-space motions, convert to a trajectory, and send as a goal request to the trajectory streamer action server.
+Playfile_reader_jointspace takes in a list of successive joint angles ("records") as a Joint Space File.
+Additional information on the Joint Space File format can be found in <a href="Joint_Grimoire.pdf">Joint_Grimoire.pdf</a>, section Joint Space File Format; example .jsp files are in playfile_reader/play/jsp
+
+Playfile_reader_cartspace and playfile_reader_cameraspace both take in the positions and rotations of the DaVinci grippers, using inverse kinematics to produce and execute a full trajectory.
+Playfile_reader_cartspace will read coordinates in the frame of Da Vinci's cameras- specifically, left_camera_optical_frame. Playfile_reader_cartspace uses the PSM coordinate spaces for the respective arms- one_psm_base_link and two_psm_base_link.
+[[WIP]]
 
 The file is read, checked for size consistency (though not for joint-range viability, nor speed viability)
 The file is packed up as a "trajectory" message and delivered within a "goal" message to the trajectory-streamer action server.
 
+All three readers can either read playfiles directly from a file path
+`roslaunch playfile_reader playfile_jointspace ~/ros_ws/absolute/path/to/jointfile.jsp`
+	
+`cd ~/ros_ws
+roslaunch playfile_reader playfile_jointspace relative/path/to/jointfile.jsp`
+
+or from a ROS package
+
+`roslaunch playfile_reader playfile_jointspace generic_package /play/jsp/jointfile.jsp`
+
 ## Example usage
-start rviz:
-`roslaunch dvrk_model wsn_psm_both_rviz.launch`
+start gazebo:
+`roslaunch davinci_gazebo sticky_davinci_gazebo.launch`
 
 start trajectory streamer action server:
 `rosrun davinci_traj_streamer davinci_traj_interpolator_as`
 
-cd to a directory containing joint playfiles, in CSV format (e.g., cd to davinci_playfiles).  Run this node with file argument, e.g.
+Run this node with package and file argument, e.g.
 to execute file testfile2.jsp, do:
-`rosrun playfile_reader playfile_jointspace testfile2.jsp`
+`rosrun playfile_reader playfile_jointspace playfile_jointspace /play/jsp/example_righthand_grabbing.jsp`
 
 ALTERNATIVE: Cartesian playfile. Read in a file of sequence of desired gripper poses, in Cartesian space.
 Perform IK, pack joint-space solutions into a trajectory, and send as goal to trajectory streamer action server:
 
 `rosrun playfile_reader playfile_cartspace testfile.csp`
+[[REDO THIS SECTION WHEN THE GRIPPERSPACE FILES ARE IN BETTER CONDITION]]
 
 //files must be designed to account for relative positions of PSM1 and PSM2 base frames w/rt world
 

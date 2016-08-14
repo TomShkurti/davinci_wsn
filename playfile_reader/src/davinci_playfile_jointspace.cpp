@@ -6,6 +6,12 @@
 
 #include <davinci_traj_streamer/trajAction.h>
 
+/*! \brief Top-level playfile reader, JSP version. Takes in a jointspace file and sends commands to davinci_traj_streamer_as
+*
+*
+* TODO: LONGER DESCRIPTION
+*/
+
 int main(int argc, char **argv) {
 	//Set up our node.
 	ros::init(argc, argv, "playfile_jointspace");
@@ -13,10 +19,12 @@ int main(int argc, char **argv) {
 	
 	//Locate our file.
 	std::string fname;
+	//Absolute path mode
 	if(argc == 2){
 		fname = argv[1];
-		ROS_INFO("Literal file location: %s", fname.c_str());
+		ROS_INFO("Absolute file location: %s", fname.c_str());
 	}
+	//Package file mode
 	else if(argc == 3){
 		std::string packpart = ros::package::getPath(argv[1]).c_str();
 		std::string pathpart = argv[2];
@@ -109,19 +117,22 @@ int main(int argc, char **argv) {
 	//Wait for it to finish.
 	while(!action_client.waitForResult(ros::Duration(total_wait_time + 2.0)) && ros::ok()){
 		ROS_WARN("CLIENT TIMED OUT- LET'S TRY AGAIN...");
+		//Could add logic here to resend the request or take other actions if we conclude that
+		//the original is NOT going to get served.
 	}
-	
+	//Report back what happened.
 	ROS_INFO(
-		"Sevre state is %s, goal state for trajectory %u is %i",
+		"Server state is %s, goal state for trajectory %u is %i",
 		action_client.getState().toString().c_str(),
 		action_client.getResult()->traj_id,
 		action_client.getResult()->return_val
 	);
 	
-	//This has to do with the intermittent bug referenced above
+	//This has to do with the intermittent "Total Recall" bug that breaks the trajectory interpolator
 	//If you see this appear in your execution, relaunch the entire simulation and everything
 	//because it's not recoverable, and contact me immediately- or, better yet, DON'T
-	//contact me, because I will have no idea what to do about it.
+	//contact me, because I will have no idea what to do about it. More information on the "Total Recall"
+	//bug can be found in tran_interpolator_both_as.cpp
 	if(action_client.getState() ==  actionlib::SimpleClientGoalState::RECALLED){
 		ROS_WARN("Server glitch. You may panic now.");
 	}

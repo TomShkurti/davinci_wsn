@@ -1,0 +1,41 @@
+Node to read a file encoding desired dual-\/arm joint-\/space motions, convert to a trajectory, and send as a goal request to the trajectory streamer action server. Playfile\-\_\-reader\-\_\-jointspace takes in a list of successive joint angles (\char`\"{}records\char`\"{}) as a Joint Space File. Additional information on the Joint Space File format can be found in \href{Joint_Grimoire.pdf}{\tt Joint\-\_\-\-Grimoire.\-pdf}, section Joint Space File Format; example .jsp files are in playfile\-\_\-reader/play/jsp
+
+Playfile\-\_\-reader\-\_\-cartspace and playfile\-\_\-reader\-\_\-cameraspace both take in the positions and rotations of the Da\-Vinci grippers, using inverse kinematics to produce and execute a full trajectory. Playfile\-\_\-reader\-\_\-cartspace will read coordinates in the frame of Da Vinci's cameras-\/ specifically, left\-\_\-camera\-\_\-optical\-\_\-frame. Playfile\-\_\-reader\-\_\-cartspace uses the P\-S\-M coordinate spaces for the respective arms-\/ one\-\_\-psm\-\_\-base\-\_\-link and two\-\_\-psm\-\_\-base\-\_\-link. \mbox{[}\mbox{[}W\-I\-P\mbox{]}\mbox{]}
+
+The file is read, checked for size consistency (though not for joint-\/range viability, nor speed viability) The file is packed up as a \char`\"{}trajectory\char`\"{} message and delivered within a \char`\"{}goal\char`\"{} message to the trajectory-\/streamer action server.
+
+All three readers can either read playfiles directly from a file path {\ttfamily roslaunch playfile\-\_\-reader playfile\-\_\-jointspace $\sim$/ros\-\_\-ws/absolute/path/to/jointfile.jsp}
+
+{\ttfamily cd $\sim$/ros\-\_\-ws roslaunch playfile\-\_\-reader playfile\-\_\-jointspace relative/path/to/jointfile.\-jsp}
+
+or from a R\-O\-S package
+
+{\ttfamily roslaunch playfile\-\_\-reader playfile\-\_\-jointspace generic\-\_\-package /play/jsp/jointfile.jsp}
+
+\subsection*{Example usage}
+
+start gazebo\-: {\ttfamily roslaunch davinci\-\_\-gazebo sticky\-\_\-davinci\-\_\-gazebo.\-launch}
+
+start trajectory streamer action server\-: {\ttfamily rosrun davinci\-\_\-traj\-\_\-streamer davinci\-\_\-traj\-\_\-interpolator\-\_\-as}
+
+Run this node with package and file argument, e.\-g. to execute file testfile2.\-jsp, do\-: {\ttfamily rosrun playfile\-\_\-reader playfile\-\_\-jointspace playfile\-\_\-jointspace /play/jsp/example\-\_\-righthand\-\_\-grabbing.jsp}
+
+A\-L\-T\-E\-R\-N\-A\-T\-I\-V\-E\-: Cartesian playfile. Read in a file of sequence of desired gripper poses, in Cartesian space. Perform I\-K, pack joint-\/space solutions into a trajectory, and send as goal to trajectory streamer action server\-:
+
+{\ttfamily rosrun playfile\-\_\-reader playfile\-\_\-cartspace testfile.\-csp} \mbox{[}\mbox{[}R\-E\-D\-O T\-H\-I\-S S\-E\-C\-T\-I\-O\-N W\-H\-E\-N T\-H\-E G\-R\-I\-P\-P\-E\-R\-S\-P\-A\-C\-E F\-I\-L\-E\-S A\-R\-E I\-N B\-E\-T\-T\-E\-R C\-O\-N\-D\-I\-T\-I\-O\-N\mbox{]}\mbox{]}
+
+//files must be designed to account for relative positions of P\-S\-M1 and P\-S\-M2 base frames w/rt world
+
+//the following are w/rt to frame O\-N\-E\-\_\-\-P\-S\-M\-\_\-\-B\-A\-S\-E\-\_\-\-L\-I\-N\-K //entries 0-\/2 = origin of P\-S\-M1 gripper tip (a point mid-\/way between the gripper jaw tips) //entries 3-\/5 = x-\/axis direction for P\-S\-M1 gripper-\/tip frame (x-\/axis points parallel to gripper-\/jaw rotation axis; y-\/axis points from fingertip to fingertip) //entries 6-\/8 = z-\/axis direction for P\-S\-M1 gripper-\/tip frame (z-\/axis points from wrist to tip) //entry 9 = angle of jaw opening (in radians)
+
+// repeat next entries for P\-S\-M2\-: //the following are w/rt to frame T\-W\-O\-\_\-\-P\-S\-M\-\_\-\-B\-A\-S\-E\-\_\-\-L\-I\-N\-K //entries 10-\/12 = origin of P\-S\-M1 gripper tip (a point mid-\/way between the gripper jaw tips) //entries 13-\/15 = x-\/axis direction for P\-S\-M1 gripper-\/tip frame (x-\/axis points parallel to gripper-\/jaw rotation axis; y-\/axis points from fingertip to fingertip) //entries 16-\/18 = z-\/axis direction for P\-S\-M1 gripper-\/tip frame (z-\/axis points from wrist to tip) //entry 19 = angle of jaw opening (in radians)
+
+//entry 20 = desired arrival time (from start of trajectory, in seconds)
+
+//each line must contain all 21 values (in fixed order), separated by commas
+
+Modified 9/27/15\-: rosrun playfile\-\_\-reader playfile\-\_\-cameraspace test\-\_\-cameraspace.\-csp This playfile version assumes desired gripper poses are expressed w/rt left camera optical frame; Uses tflistener to get transform from optical frame to each P\-S\-M base frame, then uses same I\-K code;
+
+Looks encouraging. Gets out of reach for z $\sim$$>$= 0.\-16 (along optical axis) D\-O get significant gravity droop. Alignment looks good (red dot on gripper tips align w/ optical z axis) when gravity is reduced. (Should improve gains and reduce masses).
+
+Can start up this way\-: {\ttfamily roslaunch dvrk\-\_\-model wsn\-\_\-davinci\-\_\-gazebo.\-launch} which starts 2 psm's along with stereo cameras, a table and a 1mm blue bar {\ttfamily rosrun davinci\-\_\-traj\-\_\-streamer davinci\-\_\-traj\-\_\-interpolator\-\_\-as} to get the trajectory interpolator running And from playfiles directory, retract grippers with\-: {\ttfamily rosrun playfile\-\_\-reader playfile\-\_\-cartspace retract.\-csp} then can run a camera-\/space playfile with, e.\-g.\-: {\ttfamily rosrun playfile\-\_\-reader playfile\-\_\-cameraspace test\-\_\-cameraspace.\-csp} which interprets a camera-\/space Cartesian file to drive the grippers. View in rviz to see grippers from /davinci/left\-\_\-camera/image\-\_\-raw 
