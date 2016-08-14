@@ -1,20 +1,25 @@
 # playfile_reader
 
 Node to read a file encoding desired dual-arm joint-space motions, convert to a trajectory, and send as a goal request to the trajectory streamer action server.
+
 Playfile_reader_jointspace takes in a list of successive joint angles ("records") as a Joint Space File.
-Additional information on the Joint Space File format can be found in <a href="Joint_Grimoire.pdf">Joint_Grimoire.pdf</a>, section Joint Space File Format; example .jsp files are in playfile_reader/play/jsp
+
+Additional information on the Joint Space File format can be found in <a href="Joint_Grimoire.pdf">Joint_Grimoire.pdf</a>, section Joint Space File Format; example .jsp files are in [playfile_reader/play/jsp].
 
 Playfile_reader_cartspace and playfile_reader_cameraspace both take in the positions and rotations of the DaVinci grippers, using inverse kinematics to produce and execute a full trajectory.
+
 Playfile_reader_cartspace will read coordinates in the frame of Da Vinci's cameras- specifically, left_camera_optical_frame. Playfile_reader_cartspace uses the PSM coordinate spaces for the respective arms- one_psm_base_link and two_psm_base_link.
-[[WIP]]
+<WIP>
 
 The file is read, checked for size consistency (though not for joint-range viability, nor speed viability)
 The file is packed up as a "trajectory" message and delivered within a "goal" message to the trajectory-streamer action server.
 
 All three readers can either read playfiles directly from a file path
+
 `roslaunch playfile_reader playfile_jointspace ~/ros_ws/absolute/path/to/jointfile.jsp`
 	
 `cd ~/ros_ws
+
 roslaunch playfile_reader playfile_jointspace relative/path/to/jointfile.jsp`
 
 or from a ROS package
@@ -22,10 +27,10 @@ or from a ROS package
 `roslaunch playfile_reader playfile_jointspace generic_package /play/jsp/jointfile.jsp`
 
 ## Example usage
-start gazebo:
+Start gazebo:
 `roslaunch davinci_gazebo sticky_davinci_gazebo.launch`
 
-start trajectory streamer action server:
+Start trajectory streamer action server:
 `rosrun davinci_traj_streamer davinci_traj_interpolator_as`
 
 Run this node with package and file argument, e.g.

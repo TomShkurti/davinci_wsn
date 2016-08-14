@@ -1,13 +1,16 @@
 var NAVTREE =
 [
   [ "playfile_reader", "index.html", [
-    [ "playfile_reader", "md__r_e_a_d_m_e.html", null ]
+    [ "playfile_reader", "md__r_e_a_d_m_e.html", null ],
+    [ "Files", null, [
+      [ "File List", "files.html", "files" ]
+    ] ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"index.html"
+"dir_22c7987a049e73b863b4bfc65c48fdba.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
