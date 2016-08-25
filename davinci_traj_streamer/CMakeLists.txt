@@ -30,7 +30,7 @@ cs_add_executable(davinci_traj_action_client_pre_pose src/traj_action_client_pre
 #target_link_libraries(davinci_cart_traj_pub davinci_joint_publisher davinci_kinematics ${catkin_LIBRARIES})
 #target_link_libraries(davinci_playfile_jointspace davinci_joint_publisher davinci_kinematics ${catkin_LIBRARIES})
 #target_link_libraries(davinci_traj_interpolator_as davinci_joint_publisher ${catkin_LIBRARIES})
-target_link_libraries(davinci_traj_interpolator_as davinci_kinematics ${catkin_LIBRARIES})
+target_link_libraries(davinci_traj_interpolator_as davinci_kinematics davinci_interface ${catkin_LIBRARIES})
 # target_link_library(example my_lib)
 
 cs_install()

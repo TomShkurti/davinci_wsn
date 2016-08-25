@@ -48,6 +48,8 @@
   <build_depend>trajectory_msgs</build_depend>
   <build_depend>davinci_joint_publisher</build_depend>
   <build_depend>davinci_kinematics</build_depend> 
+  
+  <build_depend>davinci_interface</build_depend> 
  <build_depend>message_generation</build_depend>
    <build_depend>actionlib_msgs</build_depend>
    <build_depend>actionlib</build_depend>   
@@ -58,6 +60,8 @@
   <run_depend>trajectory_msgs</run_depend>
  <run_depend>davinci_joint_publisher</run_depend>
  <run_depend>davinci_kinematics</run_depend>
+ 
+  <run_depend>davinci_interface</run_depend> 
 
   <run_depend>message_runtime</run_depend>
    <run_depend>actionlib_msgs</run_depend>    

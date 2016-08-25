@@ -10,7 +10,7 @@
   <xacro:macro name="psm_tool_sca" params="prefix">
     
     <!-- joint 5: Outer wrist pitch joint -->
-    <joint name="${prefix}outer_wrist_pitch_joint" type="revolute">
+    <joint name="${prefix}outer_wrist_pitch" type="revolute">
       <parent link="${prefix}tool_wrist_shaft_link"/>
       <child link="${prefix}tool_wrist_sca_link"/>
       <axis xyz="0 0 1"/>
@@ -48,7 +48,7 @@
     </link>
 
     <!-- joint 6: Outer wrist yaw joint -->
-    <joint name="${prefix}outer_wrist_yaw_joint" type="revolute">
+    <joint name="${prefix}outer_wrist_yaw" type="revolute">
       <parent link="${prefix}tool_wrist_sca_link"/>
       <child link="${prefix}tool_wrist_sca_shaft_link"/>
       <axis xyz="0 0 1"/>
@@ -76,7 +76,7 @@
     </link>
     
     <!-- joint 7-1: Outer open angle 1  -->
-    <joint name="${prefix}outer_wrist_open_angle_joint" type="revolute">
+    <joint name="${prefix}outer_wrist_open_angle" type="revolute">
       <parent link="${prefix}tool_wrist_sca_shaft_link"/>
       <child link="${prefix}tool_wrist_sca_ee_link_1"/>
       <axis xyz="0 0 1"/>
@@ -104,7 +104,7 @@
     </link>
 
     <!-- joint 7-2: Outer open angle 2   -->
-    <joint name="${prefix}outer_wrist_open_angle_joint_mimic" type="revolute">
+    <joint name="${prefix}outer_wrist_open_angle_mimic" type="revolute">
       <parent link="${prefix}tool_wrist_sca_shaft_link"/>
       <child link="${prefix}tool_wrist_sca_ee_link_2"/>
       <axis xyz="0 0 1"/>
@@ -250,7 +250,7 @@
     
  <transmission name="${prefix}tran5">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="${prefix}outer_wrist_pitch_joint">
+    <joint name="${prefix}outer_wrist_pitch">
       <hardwareInterface>EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="${prefix}motor5">
@@ -261,7 +261,7 @@
 
   <transmission name="${prefix}tran6">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="${prefix}outer_wrist_yaw_joint">
+    <joint name="${prefix}outer_wrist_yaw">
       <hardwareInterface>EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="${prefix}motor6">
@@ -272,7 +272,7 @@
 
   <transmission name="${prefix}tran7">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="${prefix}outer_wrist_open_angle_joint">
+    <joint name="${prefix}outer_wrist_open_angle">
       <hardwareInterface>EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="${prefix}motor7">
@@ -283,7 +283,7 @@
 
   <transmission name="${prefix}tran7_mimic">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="${prefix}outer_wrist_open_angle_joint_mimic">
+    <joint name="${prefix}outer_wrist_open_angle_mimic">
       <hardwareInterface>EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="${prefix}motor7_mimic">

@@ -32,7 +32,7 @@
     </link>
     
     <!-- joint 1 -->
-    <joint name="${prefix}outer_yaw_joint" type="revolute">
+    <joint name="${prefix}outer_yaw" type="revolute">
       <parent link="${prefix}psm_base_link"/>
       <child link="${prefix}outer_yaw_link"/>
       <axis xyz="0 0 1"/>
@@ -65,7 +65,7 @@
     <!-- link, all visual links mimic outer_pitch_joint value -->
     
     <!-- joint 2: outer_pitch -->
-    <joint name="${prefix}outer_pitch_joint" type="revolute">
+    <joint name="${prefix}outer_pitch" type="revolute">
       <parent link="${prefix}outer_yaw_link"/>
       <child link="${prefix}outer_pitch_link"/>
       <axis xyz="0 0 1"/>
@@ -88,7 +88,7 @@
 
     <!--wsn: for visualization links/joints of closed-chain mechanism, assign dynamic properties and control w/ fdbk-->
     <!-- joint 2-1: outer_pitch_1 -->
-    <joint name="${prefix}outer_pitch_joint_1" type="continuous">
+    <joint name="${prefix}outer_pitch_1" type="continuous">
       <parent link="${prefix}outer_yaw_link"/>
       <child link="${prefix}outer_pitch_back_link"/>
       <axis xyz="0 0 1"/>
@@ -118,7 +118,7 @@
     </link>
 
     <!-- joint 2-2: outer_pitch_2 -->
-    <joint name="${prefix}outer_pitch_joint_2" type="continuous">
+    <joint name="${prefix}outer_pitch_2" type="continuous">
       <parent link="${prefix}outer_yaw_link"/>
       <child link="${prefix}outer_pitch_front_link"/>
       <axis xyz="0 0 1"/>
@@ -147,7 +147,7 @@
     </link>
 
     <!-- joint 2-3: outer_pitch_3 -->
-    <joint name="${prefix}outer_pitch_joint_3" type="continuous">
+    <joint name="${prefix}outer_pitch_3" type="continuous">
       <parent link="${prefix}outer_pitch_back_link"/>
       <child link="${prefix}outer_pitch_bottom_link"/>
       <axis xyz="0 0 1"/>
@@ -176,7 +176,7 @@
     </link>
 
     <!-- joint 2-4: outer_pitch_4 -->
-    <joint name="${prefix}outer_pitch_joint_4" type="continuous">
+    <joint name="${prefix}outer_pitch_4" type="continuous">
       <parent link="${prefix}outer_pitch_back_link"/>
       <child link="${prefix}outer_pitch_top_link"/>
       <axis xyz="0 0 1"/>
@@ -205,7 +205,7 @@
     </link>
 
     <!-- joint 2-5: outer_pitch_5 -->
-    <joint name="${prefix}outer_pitch_joint_5" type="continuous">
+    <joint name="${prefix}outer_pitch_5" type="continuous">
       <parent link="${prefix}outer_pitch_bottom_link"/>
       <child link="${prefix}outer_insertion_link"/>
       <axis xyz="0 0 1"/>
@@ -234,7 +234,7 @@
     </link>
 
     <!-- joint 3: insertion -->
-    <joint name="${prefix}outer_insertion_joint" type="prismatic">
+    <joint name="${prefix}outer_insertion" type="prismatic">
       <!-- <parent link="${prefix}outer_insertion_link"/> -->
       <!-- <parent link="${prefix}psm_base_link"/> -->
       <parent link="${prefix}outer_pitch_link"/>
@@ -265,7 +265,7 @@
     </link>
     
     <!-- joint 4: Outer Roll -->
-    <joint name="${prefix}outer_roll_joint" type="revolute">
+    <joint name="${prefix}outer_roll" type="revolute">
       <parent link="${prefix}tool_main_link"/>
       <child link="${prefix}tool_wrist_link"/>
       <axis xyz="0 0 1"/>
@@ -322,7 +322,7 @@
 
   <transmission name="${prefix}tran1">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="${prefix}outer_yaw_joint">
+    <joint name="${prefix}outer_yaw">
       <hardwareInterface>EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="${prefix}motor1">
@@ -333,7 +333,7 @@
 
   <transmission name="${prefix}tran2">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="${prefix}outer_pitch_joint">
+    <joint name="${prefix}outer_pitch">
       <hardwareInterface>EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="${prefix}motor2">
@@ -343,7 +343,7 @@
   </transmission>
   <transmission name="${prefix}tran2_1">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="${prefix}outer_pitch_joint_1">
+    <joint name="${prefix}outer_pitch_1">
       <hardwareInterface>EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="${prefix}motor2_1">
@@ -354,7 +354,7 @@
   
     <transmission name="${prefix}tran2_2">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="${prefix}outer_pitch_joint_2">
+    <joint name="${prefix}outer_pitch_2">
       <hardwareInterface>EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="${prefix}motor2_2">
@@ -365,7 +365,7 @@
 
       <transmission name="${prefix}tran2_3">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="${prefix}outer_pitch_joint_3">
+    <joint name="${prefix}outer_pitch_3">
       <hardwareInterface>EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="${prefix}motor2_3">
@@ -376,7 +376,7 @@
 
       <transmission name="${prefix}tran2_4">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="${prefix}outer_pitch_joint_4">
+    <joint name="${prefix}outer_pitch_4">
       <hardwareInterface>EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="${prefix}motor2_4">
@@ -387,7 +387,7 @@
     
   <transmission name="${prefix}tran2_5">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="${prefix}outer_pitch_joint_5">
+    <joint name="${prefix}outer_pitch_5">
       <hardwareInterface>EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="${prefix}motor2_5">
@@ -398,7 +398,7 @@
   
   <transmission name="${prefix}tran3">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="${prefix}outer_insertion_joint">
+    <joint name="${prefix}outer_insertion">
       <hardwareInterface>EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="${prefix}motor3">
@@ -409,7 +409,7 @@
   
     <transmission name="${prefix}tran4">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="${prefix}outer_roll_joint">
+    <joint name="${prefix}outer_roll">
       <hardwareInterface>EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="${prefix}motor4">

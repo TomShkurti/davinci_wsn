@@ -47,7 +47,7 @@
     <link name="${prefix}_base_link"/>
 
     <!-- Joint 1: Outer Yaw -->
-    <joint name="${prefix}_yaw_joint" type="revolute">
+    <joint name="${prefix}_yaw" type="revolute">
       <parent link="${prefix}_base_link"/>
       <child link="${prefix}_yaw_link"/>
       <origin rpy="0 -${PI/2} ${PI/2}" xyz="0 0 0"/>
@@ -76,7 +76,7 @@
     </link>
 
     <!-- Joint 2: Pitch -->
-    <joint name="${prefix}_pitch_joint" type="revolute">
+    <joint name="${prefix}_pitch" type="revolute">
       <parent link="${prefix}_yaw_link"/>
       <child link="${prefix}_pitch_link"/>
       <origin rpy="-${PI/2} -${PI/2} 0" xyz="0 0 0"/>
@@ -86,7 +86,7 @@
     </joint>
     <link name="${prefix}_pitch_link"/>
 
-    <joint name="${prefix}_pitch_joint_0" type="continuous">
+    <joint name="${prefix}_pitch_0" type="continuous">
       <parent link="${prefix}_yaw_link"/>
       <child link="${prefix}_pitch_link_1"/>
       <origin rpy="-${PI/2} -${PI/2} 0" xyz="0 0 0.378"/>
@@ -115,13 +115,13 @@
       </inertial>
     </link>
 
-    <joint name="${prefix}_pitch_joint_1" type="continuous">
+    <joint name="${prefix}_pitch_1" type="continuous">
       <parent link="${prefix}_pitch_link_1"/>
       <child link="${prefix}_pitch_link_2"/>
       <origin rpy="0 0 0" xyz="0.0558629 0.274575 0"/>
       <axis xyz="0 0 1"/>
       <joint_properties damping="1.0" friction="0.0"/>
-      <mimic joint="${prefix}_pitch_joint" multiplier="-1"/>
+      <mimic joint="${prefix}_pitch" multiplier="-1"/>
     </joint>
 
     <link name="${prefix}_pitch_link_2">
@@ -144,13 +144,13 @@
       </inertial>
     </link>
 
-    <joint name="${prefix}_pitch_joint_2" type="continuous">
+    <joint name="${prefix}_pitch_2" type="continuous">
       <parent link="${prefix}_pitch_link_2"/>
       <child link="${prefix}_pitch_link_3"/>
       <origin rpy="0 0 0" xyz="-0.340 0 0"/>
       <axis xyz="0 0 1"/>
       <joint_properties damping="1.0" friction="0.0"/>
-      <mimic joint="${prefix}_pitch_joint" multiplier="1"/>
+      <mimic joint="${prefix}_pitch" multiplier="1"/>
     </joint>
 
     <link name="${prefix}_pitch_link_3">
@@ -174,7 +174,7 @@
     </link>
     
     <!-- Joint 3: Insertion -->
-    <joint name="${prefix}_insertion_joint" type="prismatic">
+    <joint name="${prefix}_insertion" type="prismatic">
       <parent link="${prefix}_pitch_link"/>
       <child link="${prefix}_insertion_link"/>
       <origin rpy="${PI/2} 0 0" xyz="0 0.3822 0"/>
@@ -200,7 +200,7 @@
     </link>
 
     <!-- Joint 4: Roll -->
-    <joint name="${prefix}_roll_joint" type="revolute">
+    <joint name="${prefix}_roll" type="revolute">
       <parent link="${prefix}_insertion_link"/>
       <child link="${prefix}_roll_link"/>
       <origin rpy="0 0 0" xyz="0 0 0.3829"/>
