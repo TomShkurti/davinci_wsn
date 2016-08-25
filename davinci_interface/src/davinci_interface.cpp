@@ -1,5 +1,30 @@
 #include <davinci_interface/davinci_interface.h>
 
+const std::string OUTPUT_JOINT_NAMES[13] = {
+	"joint1_position_controller"	,
+	"joint2_position_controller"	,
+	"joint2_1_position_controller"	,
+	"joint2_2_position_controller"	,
+	"joint2_3_position_controller"	,
+	"joint2_4_position_controller"	,
+	"joint2_5_position_controller"	,
+	"joint3_position_controller"	,
+	"joint4_position_controller"	,
+	"joint5_position_controller"	,
+	"joint6_position_controller"	,
+	"joint7_position_controller"	,
+	"joint7_position_controller_mimic"
+};
+const std::string INPUT_JOINT_NAMES[7] = {
+	"outer_yaw"			,
+	"outer_pitch"			,
+	"outer_insertion"		,
+	"outer_roll"			,
+	"outer_wrist_pitch"		,
+	"outer_wrist_yaw"		,
+	"jaw"	
+};
+
 static bool publisher_ready = false;
 static bool subscriber_ready = false;
 
@@ -9,41 +34,11 @@ static ros::Subscriber robot_state_sub;
 
 static ros::Publisher joint_publishers[2][13];
 
+//May want to expand this later on, give it functions for single arms, etc.
+std::vector<std::vector<double> > expand_joint_list(const double input[14]);
+
 //Callbacks
 void CB_update(const sensor_msgs::JointState::ConstPtr& incoming);
-
-std::vector<std::vector<double> > davinci_interface::expand_joint_list(const double input[14]){
-	std::vector<std::vector<double> > njl;
-	njl.resize(2);
-	njl[0].resize(13);
-	njl[1].resize(13);
-	
-	for(int i = 0; i < 2; i++){
-		int offset = i * 7;
-		njl[i][0] = input[0 + offset];//joint1_position_controller
- 
-		njl[i][1] = input[1 + offset];//joint2_position_controller
-		njl[i][2] = input[1 + offset];//joint2_1_position_controller
-		njl[i][3] = input[1 + offset];//joint2_2_position_controller
-		njl[i][6] = input[1 + offset];//joint2_5_position_controller 
-
-		njl[i][4] = -input[1 + offset];//joint2_3_position_controller 
-		njl[i][5] = -input[1 + offset];//joint2_4_position_controller
-		
-		njl[i][7] = input[2 + offset];//joint3_position_controller
-
-		njl[i][8] = input[3 + offset];//joint4_position_controller
-
-		njl[i][9] = input[4 + offset];//joint5_position_controller
-
-		njl[i][10] = input[5 + offset];//joint6_position_controller
-
-		njl[i][11] = input[6 + offset];//joint7_position_controller
-		njl[i][12] = -input[6 + offset];//joint7_position_controller_mimic
-	}
-    
-	return njl;
-}
 
 void davinci_interface::init_joint_control(ros::NodeHandle & nh){
 	if(!publisher_ready){
@@ -112,4 +107,37 @@ void CB_update(const sensor_msgs::JointState::ConstPtr& incoming){
 	fresh_pos = true;
 	states = *incoming;
 	return;
+}
+
+std::vector<std::vector<double> > expand_joint_list(const double input[14]){
+	std::vector<std::vector<double> > njl;
+	njl.resize(2);
+	njl[0].resize(13);
+	njl[1].resize(13);
+	
+	for(int i = 0; i < 2; i++){
+		int offset = i * 7;
+		njl[i][0] = input[0 + offset];//joint1_position_controller
+ 
+		njl[i][1] = input[1 + offset];//joint2_position_controller
+		njl[i][2] = input[1 + offset];//joint2_1_position_controller
+		njl[i][3] = input[1 + offset];//joint2_2_position_controller
+		njl[i][6] = input[1 + offset];//joint2_5_position_controller 
+
+		njl[i][4] = -input[1 + offset];//joint2_3_position_controller 
+		njl[i][5] = -input[1 + offset];//joint2_4_position_controller
+		
+		njl[i][7] = input[2 + offset];//joint3_position_controller
+
+		njl[i][8] = input[3 + offset];//joint4_position_controller
+
+		njl[i][9] = input[4 + offset];//joint5_position_controller
+
+		njl[i][10] = input[5 + offset];//joint6_position_controller
+
+		njl[i][11] = input[6 + offset];//joint7_position_controller
+		njl[i][12] = -input[6 + offset];//joint7_position_controller_mimic
+	}
+    
+	return njl;
 }

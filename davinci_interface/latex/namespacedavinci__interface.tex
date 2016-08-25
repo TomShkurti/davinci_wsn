@@ -1,0 +1,96 @@
+\hypertarget{namespacedavinci__interface}{\section{davinci\-\_\-interface Namespace Reference}
+\label{namespacedavinci__interface}\index{davinci\-\_\-interface@{davinci\-\_\-interface}}
+}
+
+
+The davinci simulation and/or robot interface. Use instead of directly calling topics.  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{namespacedavinci__interface_adc6383d2e91730a320974ecb91d044d1}{init\-\_\-joint\-\_\-control} (ros\-::\-Node\-Handle \&nh)
+\begin{DoxyCompactList}\small\item\em Set up publishers to connect to Da\-Vinci's joints. \end{DoxyCompactList}\item 
+bool \hyperlink{namespacedavinci__interface_a2e3784f76cf3be72ecbd8decf60fe134}{publish\-\_\-joints} (const double input\mbox{[}14\mbox{]})
+\begin{DoxyCompactList}\small\item\em Send a joint configuration to the robot. \end{DoxyCompactList}\item 
+void \hyperlink{namespacedavinci__interface_aa2e68a485603086bfe204c4d71be416c}{init\-\_\-joint\-\_\-feedback} (ros\-::\-Node\-Handle \&nh)
+\begin{DoxyCompactList}\small\item\em Set up subscribers to listen to Da\-Vinci's joints. \end{DoxyCompactList}\item 
+bool \hyperlink{namespacedavinci__interface_a7ade5fe22831b7ea798246d01e29a27e}{get\-\_\-fresh\-\_\-robot\-\_\-pos} (std\-::vector$<$ std\-::vector$<$ double $>$ $>$ \&output)
+\begin{DoxyCompactList}\small\item\em Recieve an up-\/to-\/date joint configuration from the robot. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The davinci simulation and/or robot interface. Use instead of directly calling topics. This will prevent both dupication and unnecessary work (having fifty packages with fifty slightly different ways of reading joint states), and also make it much easier to change methods of interacting with the robot that are still in a fair degree of flux. Since part of the point of this package is to simplify making changes to the interface, anything that does N\-O\-T use it may break at any time. 
+
+\subsection{Function Documentation}
+\hypertarget{namespacedavinci__interface_a7ade5fe22831b7ea798246d01e29a27e}{\index{davinci\-\_\-interface@{davinci\-\_\-interface}!get\-\_\-fresh\-\_\-robot\-\_\-pos@{get\-\_\-fresh\-\_\-robot\-\_\-pos}}
+\index{get\-\_\-fresh\-\_\-robot\-\_\-pos@{get\-\_\-fresh\-\_\-robot\-\_\-pos}!davinci_interface@{davinci\-\_\-interface}}
+\subsubsection[{get\-\_\-fresh\-\_\-robot\-\_\-pos}]{\setlength{\rightskip}{0pt plus 5cm}bool davinci\-\_\-interface\-::get\-\_\-fresh\-\_\-robot\-\_\-pos (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ std\-::vector$<$ double $>$ $>$ \&}]{output}
+\end{DoxyParamCaption}
+)}}\label{namespacedavinci__interface_a7ade5fe22831b7ea798246d01e29a27e}
+
+
+Recieve an up-\/to-\/date joint configuration from the robot. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em output} & A two-\/dimensional vector of doubles that will be filled with the joint states.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+T\-R\-U\-E if there exist topics on which to listen to the joint states (i.\-e. joint listening has been initialized), F\-A\-L\-S\-E otherwise.
+\end{DoxyReturn}
+Fills a vector with a guaranteed up-\/to-\/date joint configuration from the robot. This function will block until a joint configuration has been recieved. \hypertarget{namespacedavinci__interface_adc6383d2e91730a320974ecb91d044d1}{\index{davinci\-\_\-interface@{davinci\-\_\-interface}!init\-\_\-joint\-\_\-control@{init\-\_\-joint\-\_\-control}}
+\index{init\-\_\-joint\-\_\-control@{init\-\_\-joint\-\_\-control}!davinci_interface@{davinci\-\_\-interface}}
+\subsubsection[{init\-\_\-joint\-\_\-control}]{\setlength{\rightskip}{0pt plus 5cm}void davinci\-\_\-interface\-::init\-\_\-joint\-\_\-control (
+\begin{DoxyParamCaption}
+\item[{ros\-::\-Node\-Handle \&}]{nh}
+\end{DoxyParamCaption}
+)}}\label{namespacedavinci__interface_adc6383d2e91730a320974ecb91d044d1}
+
+
+Set up publishers to connect to Da\-Vinci's joints. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em nh} & The nodehandle of the node to enable output for.\\
+\hline
+\end{DoxyParams}
+Call this before attempting to use publish\-\_\-joints to initiate lines of communication with either the simulation or physical robot. If this is not done at least once, publish\-\_\-joints will not be able to publish your commands on any topic, the robot won't do anything, and it will return F\-A\-L\-S\-E. \hypertarget{namespacedavinci__interface_aa2e68a485603086bfe204c4d71be416c}{\index{davinci\-\_\-interface@{davinci\-\_\-interface}!init\-\_\-joint\-\_\-feedback@{init\-\_\-joint\-\_\-feedback}}
+\index{init\-\_\-joint\-\_\-feedback@{init\-\_\-joint\-\_\-feedback}!davinci_interface@{davinci\-\_\-interface}}
+\subsubsection[{init\-\_\-joint\-\_\-feedback}]{\setlength{\rightskip}{0pt plus 5cm}void davinci\-\_\-interface\-::init\-\_\-joint\-\_\-feedback (
+\begin{DoxyParamCaption}
+\item[{ros\-::\-Node\-Handle \&}]{nh}
+\end{DoxyParamCaption}
+)}}\label{namespacedavinci__interface_aa2e68a485603086bfe204c4d71be416c}
+
+
+Set up subscribers to listen to Da\-Vinci's joints. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em nh} & The nodehandle of the node to enable input for.\\
+\hline
+\end{DoxyParams}
+Call this before attempting to use get\-\_\-fresh\-\_\-robot\-\_\-pos to initiate lines of communication with either the simulation or physical robot. If this is not done at least once, get\-\_\-fresh\-\_\-robot\-\_\-pos will not be able to listen to the robot, you won't get any information, and it will return F\-A\-L\-S\-E. \hypertarget{namespacedavinci__interface_a2e3784f76cf3be72ecbd8decf60fe134}{\index{davinci\-\_\-interface@{davinci\-\_\-interface}!publish\-\_\-joints@{publish\-\_\-joints}}
+\index{publish\-\_\-joints@{publish\-\_\-joints}!davinci_interface@{davinci\-\_\-interface}}
+\subsubsection[{publish\-\_\-joints}]{\setlength{\rightskip}{0pt plus 5cm}bool davinci\-\_\-interface\-::publish\-\_\-joints (
+\begin{DoxyParamCaption}
+\item[{const double}]{input\mbox{[}14\mbox{]}}
+\end{DoxyParamCaption}
+)}}\label{namespacedavinci__interface_a2e3784f76cf3be72ecbd8decf60fe134}
+
+
+Send a joint configuration to the robot. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & An array of joint values, one for each joint.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+T\-R\-U\-E if there exist topics on which the joint message was sent (i.\-e. joint control has been initialized), F\-A\-L\-S\-E otherwise.
+\end{DoxyReturn}
+Sends a set of joint commands to the simulated or physical Da\-Vinci robot, based on an input array. The array is formatted in accordance with the Da\-Vinci Joint Configuration. Note that there is N\-O guarantee that the messages sent were recieved or that the controllers executed them; use get\-\_\-fresh\-\_\-robot\-\_\-pos to check this. 
