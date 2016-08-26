@@ -87,6 +87,8 @@ int main(int argc, char **argv) {
 		sl.sleep();
 	}
 	
+	outfile.close();
+	
 	return 0;
 }
 

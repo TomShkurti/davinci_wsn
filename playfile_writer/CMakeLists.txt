@@ -9,9 +9,7 @@ add_definitions(${EIGEN_DEFINITIONS})
 
 catkin_simple()
 
-# Executables
-#cs_add_library(playfile_record src/playfile_record.cpp)   
-
+# Executables 
 cs_add_executable(playfile_writer src/playfile_writer.cpp)
 
 #target_link_libraries(playfile_jointspace davinci_joint_publisher playfile_record davinci_kinematics ${catkin_LIBRARIES})
