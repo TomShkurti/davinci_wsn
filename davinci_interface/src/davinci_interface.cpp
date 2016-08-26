@@ -119,6 +119,8 @@ bool davinci_interface::get_last_robot_pos(std::vector<std::vector<double> > & o
 		Davinci_fwd_solver::get_jnt_val_by_name("two_" + INPUT_JOINT_NAMES[i], states, output[1][i]);
 	}
 	
+	fresh_pos = false;
+	
 	return true;
 }
 
