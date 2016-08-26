@@ -103,6 +103,25 @@ bool davinci_interface::get_fresh_robot_pos(std::vector<std::vector<double> > & 
 	return true;
 }
 
+bool davinci_interface::get_last_robot_pos(std::vector<std::vector<double> > & output){
+	if(!subscriber_ready || !fresh_pos){
+		return false;
+	}
+	
+	output.clear();
+	output.resize(2);
+	output[0].resize(13);
+	output[1].resize(13);
+	
+	//Read the robopositions
+	for(int i = 0; i < 13; i++){
+		Davinci_fwd_solver::get_jnt_val_by_name("one_" + INPUT_JOINT_NAMES[i], states, output[0][i]);
+		Davinci_fwd_solver::get_jnt_val_by_name("two_" + INPUT_JOINT_NAMES[i], states, output[1][i]);
+	}
+	
+	return true;
+}
+
 void CB_update(const sensor_msgs::JointState::ConstPtr& incoming){
 	fresh_pos = true;
 	states = *incoming;

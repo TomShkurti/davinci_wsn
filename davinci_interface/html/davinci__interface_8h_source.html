@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>My Project: davinci_interface/davinci_interface.h Source File</title>
+<title>Davinci_interface: include/davinci_interface/davinci_interface.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,7 +29,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">Davinci_interface
    </div>
   </td>
  </tr>
@@ -121,11 +121,15 @@ $(document).ready(function(){initNavTree('davinci__interface_8h_source.html','')
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacedavinci__interface.html#aa2e68a485603086bfe204c4d71be416c">init_joint_feedback</a>(ros::NodeHandle &amp; nh);</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="comment">//Same as with the joint commander, we may want to expand this later on and create ones for individual arms, for the last known pos, etc.</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="namespacedavinci__interface.html#a7ade5fe22831b7ea798246d01e29a27e">get_fresh_robot_pos</a>(std::vector&lt;std::vector&lt;double&gt; &gt; &amp; output);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;};</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">/* DAVINCI_INT_H */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="comment">//Same as with the joint commander, we may want to expand this later on and create ones for individual arms, etc.</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="namespacedavinci__interface.html#a7ade5fe22831b7ea798246d01e29a27e">get_fresh_robot_pos</a>(std::vector&lt;std::vector&lt;double&gt; &gt; &amp; output);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="comment">//Same as with the joint commander, we may want to expand this later on and create ones for individual arms, etc.</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="namespacedavinci__interface.html#a858f1105c8464ed7255903b7cfb7690b">get_last_robot_pos</a>(std::vector&lt;std::vector&lt;double&gt; &gt; &amp; output);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;};</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">/* DAVINCI_INT_H */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="namespacedavinci__interface_html_a858f1105c8464ed7255903b7cfb7690b"><div class="ttname"><a href="namespacedavinci__interface.html#a858f1105c8464ed7255903b7cfb7690b">davinci_interface::get_last_robot_pos</a></div><div class="ttdeci">bool get_last_robot_pos(std::vector&lt; std::vector&lt; double &gt; &gt; &amp;output)</div><div class="ttdoc">Recieve the most recent joint configuration from the robot. </div></div>
 <div class="ttc" id="namespacedavinci__interface_html_adc6383d2e91730a320974ecb91d044d1"><div class="ttname"><a href="namespacedavinci__interface.html#adc6383d2e91730a320974ecb91d044d1">davinci_interface::init_joint_control</a></div><div class="ttdeci">void init_joint_control(ros::NodeHandle &amp;nh)</div><div class="ttdoc">Set up publishers to connect to DaVinci&#39;s joints. </div></div>
 <div class="ttc" id="namespacedavinci__interface_html_aa2e68a485603086bfe204c4d71be416c"><div class="ttname"><a href="namespacedavinci__interface.html#aa2e68a485603086bfe204c4d71be416c">davinci_interface::init_joint_feedback</a></div><div class="ttdeci">void init_joint_feedback(ros::NodeHandle &amp;nh)</div><div class="ttdoc">Set up subscribers to listen to DaVinci&#39;s joints. </div></div>
 <div class="ttc" id="namespacedavinci__interface_html_a7ade5fe22831b7ea798246d01e29a27e"><div class="ttname"><a href="namespacedavinci__interface.html#a7ade5fe22831b7ea798246d01e29a27e">davinci_interface::get_fresh_robot_pos</a></div><div class="ttdeci">bool get_fresh_robot_pos(std::vector&lt; std::vector&lt; double &gt; &gt; &amp;output)</div><div class="ttdoc">Recieve an up-to-date joint configuration from the robot. </div></div>
@@ -135,8 +139,8 @@ $(document).ready(function(){initNavTree('davinci__interface_8h_source.html','')
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_c10549ba72445f6eb711e785b59ed612.html">davinci_interface</a></li><li class="navelem"><b>davinci_interface.h</b></li>
-    <li class="footer">Generated on Thu Aug 25 2016 14:40:28 for My Project by
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_c360220c5953f4ba98025c5323049c2c.html">davinci_interface</a></li><li class="navelem"><b>davinci_interface.h</b></li>
+    <li class="footer">Generated on Fri Aug 26 2016 14:03:08 for Davinci_interface by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

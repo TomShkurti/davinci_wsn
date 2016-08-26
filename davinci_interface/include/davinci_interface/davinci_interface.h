@@ -49,12 +49,25 @@ namespace davinci_interface {
 		
 		\param[in,out]	output	A two-dimensional vector of doubles that will be filled with the joint states.
 		
-		\returns TRUE if there exist topics on which to listen to the joint states (i.e.  joint listening has been initialized), FALSE otherwise.
+		\returns TRUE if there exist topics on which to listen to the joint states (i.e. joint listening has been initialized), FALSE otherwise.
 		
 	Fills a vector with a guaranteed up-to-date joint configuration from the robot. This function will block until a joint configuration has been recieved.
 	*/
-	//Same as with the joint commander, we may want to expand this later on and create ones for individual arms, for the last known pos, etc.
+	
+	//Same as with the joint commander, we may want to expand this later on and create ones for individual arms, etc.
 	bool get_fresh_robot_pos(std::vector<std::vector<double> > & output);
+	
+	/*!	\fn bool get_last_robot_pos(std::vector<std::vector<double> > & output)
+		\brief Recieve the most recent joint configuration from the robot
+		
+		\param[in,out]	output	A two-dimensional vector of doubles that will be filled with the joint states.
+		
+		\returns TRUE if there exist topics on which to listen to the joint states (i.e. joint listening has been initialized) <i>and</i> there is a joint state waiting, FALSE otherwise.
+		
+	Fills a vector with the most recent joint configuration from the robot.
+	*/
+	//Same as with the joint commander, we may want to expand this later on and create ones for individual arms, etc.
+	bool get_last_robot_pos(std::vector<std::vector<double> > & output);
 };
 
 #endif	/* DAVINCI_INT_H */
