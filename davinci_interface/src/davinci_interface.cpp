@@ -44,8 +44,8 @@ void davinci_interface::init_joint_control(ros::NodeHandle & nh){
 	if(!publisher_ready){
 		//Set up the publishers.
 		for(int i = 0; i < 13; i++){
-			joint_publishers[0][i] = nh.advertise<std_msgs::Float64>("/davinci/one_" + OUTPUT_JOINT_NAMES[i] + "/command", 1, true); 
-			joint_publishers[1][i] = nh.advertise<std_msgs::Float64>("/davinci/two_" + OUTPUT_JOINT_NAMES[i] + "/command", 1, true);
+			joint_publishers[0][i] = nh.advertise<std_msgs::Float64>("/davinci/two_" + OUTPUT_JOINT_NAMES[i] + "/command", 1, true); 
+			joint_publishers[1][i] = nh.advertise<std_msgs::Float64>("/davinci/one_" + OUTPUT_JOINT_NAMES[i] + "/command", 1, true);
 		}
 		publisher_ready = true;
 	}
@@ -91,8 +91,8 @@ bool davinci_interface::get_fresh_robot_pos(std::vector<std::vector<double> > & 
 	
 	//Read the robopositions
 	for(int i = 0; i < 13; i++){
-		Davinci_fwd_solver::get_jnt_val_by_name("one_" + INPUT_JOINT_NAMES[i], states, output[0][i]);
-		Davinci_fwd_solver::get_jnt_val_by_name("two_" + INPUT_JOINT_NAMES[i], states, output[1][i]);
+		Davinci_fwd_solver::get_jnt_val_by_name("two_" + INPUT_JOINT_NAMES[i], states, output[0][i]);
+		Davinci_fwd_solver::get_jnt_val_by_name("one_" + INPUT_JOINT_NAMES[i], states, output[1][i]);
 	}
 	
 	/*ROS_INFO("Arm two is at: ");
@@ -115,8 +115,8 @@ bool davinci_interface::get_last_robot_pos(std::vector<std::vector<double> > & o
 	
 	//Read the robopositions
 	for(int i = 0; i < 13; i++){
-		Davinci_fwd_solver::get_jnt_val_by_name("one_" + INPUT_JOINT_NAMES[i], states, output[0][i]);
-		Davinci_fwd_solver::get_jnt_val_by_name("two_" + INPUT_JOINT_NAMES[i], states, output[1][i]);
+		Davinci_fwd_solver::get_jnt_val_by_name("two_" + INPUT_JOINT_NAMES[i], states, output[0][i]);
+		Davinci_fwd_solver::get_jnt_val_by_name("one_" + INPUT_JOINT_NAMES[i], states, output[1][i]);
 	}
 	
 	fresh_pos = false;

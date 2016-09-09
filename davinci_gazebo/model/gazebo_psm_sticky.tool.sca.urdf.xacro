@@ -225,11 +225,10 @@
 					<!-- put a fiducial, a sphere, at the tool tips -->
 					<sphere radius="0.001"/>
 				</geometry>
-	
 			</visual>
 		</link>
 
-		<!--this colors the tool-tip fiducial red; oddly, this shows up in the camera view, but NOT in the rviz view -->
+		<!--this colors the tool-tip fiducial; oddly, this shows up in the camera view, but NOT in the rviz view -->
 		<gazebo reference="${prefix}tool_tip_link">
 			<material>Gazebo/Red</material>
 		</gazebo>

@@ -64,8 +64,8 @@
 		<!--origin rpy="0.0 0.0 0.0" xyz="0.0 0.2 0.8"/-->
 	</link>
 
-	<xacro:psm_sca prefix="one_" parent_link="camera" xyz="-0.15 0.05 0.5" rpy="0.0 0.0 3.1415926"/>
-	<xacro:psm_sca prefix="two_" parent_link="camera" xyz="0.15 0.05 0.5" rpy="0.0 0.0 3.1415926"/>
+	<xacro:psm_sca prefix="two_" colorcode="Green" parent_link="camera" xyz="-0.15 0.05 0.5" rpy="0.0 0.0 3.1415926"/>
+	<xacro:psm_sca prefix="one_" colorcode="Yellow" parent_link="camera" xyz="0.15 0.05 0.5" rpy="0.0 0.0 3.1415926"/>
 
 	<!-- ros_control plugin -->
 	<gazebo>
