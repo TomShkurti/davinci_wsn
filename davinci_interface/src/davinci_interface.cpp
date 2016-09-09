@@ -44,8 +44,8 @@ void davinci_interface::init_joint_control(ros::NodeHandle & nh){
 	if(!publisher_ready){
 		//Set up the publishers.
 		for(int i = 0; i < 13; i++){
-			joint_publishers[0][i] = nh.advertise<std_msgs::Float64>("/davinci/two_" + OUTPUT_JOINT_NAMES[i] + "/command", 1, true); 
-			joint_publishers[1][i] = nh.advertise<std_msgs::Float64>("/davinci/one_" + OUTPUT_JOINT_NAMES[i] + "/command", 1, true);
+			joint_publishers[0][i] = nh.advertise<std_msgs::Float64>("/dvrk/two_" + OUTPUT_JOINT_NAMES[i] + "/command", 1, true); 
+			joint_publishers[1][i] = nh.advertise<std_msgs::Float64>("/dvrk/one_" + OUTPUT_JOINT_NAMES[i] + "/command", 1, true);
 		}
 		publisher_ready = true;
 	}
@@ -68,7 +68,7 @@ bool davinci_interface::publish_joints(const double input[14]){
 
 void davinci_interface::init_joint_feedback(ros::NodeHandle & nh){
 	if(!subscriber_ready){
-		ros::Subscriber robot_state_sub = nh.subscribe("/davinci/joint_states", 10, CB_update);
+		ros::Subscriber robot_state_sub = nh.subscribe("/dvrk/joint_states", 10, CB_update);
 		subscriber_ready = true;
 		fresh_pos = false;
 	}
