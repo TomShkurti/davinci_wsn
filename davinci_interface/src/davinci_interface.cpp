@@ -95,7 +95,7 @@ bool davinci_interface::get_fresh_robot_pos(std::vector<std::vector<double> > & 
 		Davinci_fwd_solver::get_jnt_val_by_name("one_" + INPUT_JOINT_NAMES[i], states, output[1][i]);
 	}
 	
-	/*ROS_INFO("Arm two is at: ");
+	/*ROS_INFO("Arm one is at: ");
 	for(int i  = 0; i < 13; i++){
 		ROS_INFO("	%f", rp[1][i]);
 	}*/
