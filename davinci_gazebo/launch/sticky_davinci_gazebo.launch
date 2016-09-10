@@ -24,9 +24,10 @@
 <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model davinci" />
 
 <!-- ros_control launch file -->
-  <include file="$(find dvrk_model)/launch/davinci_control_both.launch">
- </include>
+  <include file="$(find davinci_gazebo)/launch/davinci_control_both.launch">
+</include>
 
+<!--I have no clue what this does.-->
 <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node>
 <param name="rate" value="100" />
 
