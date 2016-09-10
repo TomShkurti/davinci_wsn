@@ -16,7 +16,7 @@ reference_frame: world
 
 rosrun playfile_reader playfile_jointspace dv_string_puller /play/jsp/bothhands_grasp.jsp
 
-rosrun sticky_fingers finger_control_dummy_node sticky_finger/two_fingertip1_sticky smooth
+rosrun sticky_fingers finger_control_dummy_node sticky_finger/one_fingertip1_sticky smooth
 
 echo "Ready:"
 
@@ -26,6 +26,6 @@ read X
 
 rosrun playfile_reader playfile_jointspace  dv_string_puller /play/jsp/all_zero.jsp
 
-rosrun sticky_fingers finger_control_dummy_node sticky_finger/one_fingertip1_sticky smooth
+rosrun sticky_fingers finger_control_dummy_node sticky_finger/two_fingertip1_sticky smooth
 
 rosservice call gazebo/delete_model '{model_name: ltr}'
