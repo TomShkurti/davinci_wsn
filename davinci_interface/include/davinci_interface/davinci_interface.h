@@ -4,6 +4,9 @@
 #include <ros/ros.h>
 
 #include <std_msgs/Float64.h>
+#include <std_msgs/MultiArrayLayout.h>
+#include <std_msgs/MultiArrayDimension.h>
+#include <std_msgs/Float64MultiArray.h>
 #include <sensor_msgs/JointState.h>
 
 #include <davinci_kinematics/davinci_kinematics.h>

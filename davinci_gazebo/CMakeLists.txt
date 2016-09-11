@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 2.8.3)
 project(davinci_gazebo)
 
 find_package(catkin_simple REQUIRED)
+find_package(Eigen3 REQUIRED)
+
+include_directories(${EIGEN3_INCLUDE_DIR})
+add_definitions(${EIGEN_DEFINITIONS})
 
 catkin_simple()
 
@@ -15,7 +19,8 @@ catkin_simple()
 # cs_add_library(my_lib src/my_lib.cpp)   
 
 # Executables
-# cs_add_executable(example src/example.cpp)
+cs_add_executable(adapter_input src/adapter_input.cpp)
+cs_add_executable(adapter_output src/adapter_output.cpp)
 # target_link_library(example my_lib)
 
 cs_install()

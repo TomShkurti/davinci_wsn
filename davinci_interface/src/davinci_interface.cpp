@@ -1,20 +1,5 @@
 #include <davinci_interface/davinci_interface.h>
 
-const std::string OUTPUT_JOINT_NAMES[13] = {
-	"joint1_position_controller"	,
-	"joint2_position_controller"	,
-	"joint2_1_position_controller"	,
-	"joint2_2_position_controller"	,
-	"joint2_3_position_controller"	,
-	"joint2_4_position_controller"	,
-	"joint2_5_position_controller"	,
-	"joint3_position_controller"	,
-	"joint4_position_controller"	,
-	"joint5_position_controller"	,
-	"joint6_position_controller"	,
-	"joint7_position_controller"	,
-	"joint7_position_controller_mimic"
-};
 const std::string INPUT_JOINT_NAMES[7] = {
 	"outer_yaw"			,
 	"outer_pitch"			,
@@ -28,25 +13,25 @@ const std::string INPUT_JOINT_NAMES[7] = {
 static bool publisher_ready = false;
 static bool subscriber_ready = false;
 
-static bool fresh_pos;
-static sensor_msgs::JointState states;
-static ros::Subscriber robot_state_sub;
+static bool fresh_pos_1;
+static bool fresh_pos_2;
+static sensor_msgs::JointState states_1;
+static sensor_msgs::JointState states_2;
+static ros::Subscriber robot_state_sub_1;
+static ros::Subscriber robot_state_sub_2;
 
-static ros::Publisher joint_publishers[2][13];
-
-//May want to expand this later on, give it functions for single arms, etc.
-std::vector<std::vector<double> > expand_joint_list(const double input[14]);
+static ros::Publisher joint_publisher_1;
+static ros::Publisher joint_publisher_2;
 
 //Callbacks
-void CB_update(const sensor_msgs::JointState::ConstPtr& incoming);
+void CB_update_1(const sensor_msgs::JointState::ConstPtr& incoming);
+void CB_update_2(const sensor_msgs::JointState::ConstPtr& incoming);
 
 void davinci_interface::init_joint_control(ros::NodeHandle & nh){
 	if(!publisher_ready){
 		//Set up the publishers.
-		for(int i = 0; i < 13; i++){
-			joint_publishers[0][i] = nh.advertise<std_msgs::Float64>("/dvrk/two_" + OUTPUT_JOINT_NAMES[i] + "/command", 1, true); 
-			joint_publishers[1][i] = nh.advertise<std_msgs::Float64>("/dvrk/one_" + OUTPUT_JOINT_NAMES[i] + "/command", 1, true);
-		}
+		joint_publisher_1 = nh.advertise<sensor_msgs::JointState>("/dvrk/PSM1/position_joint_desired", 1, true);
+		joint_publisher_2 = nh.advertise<sensor_msgs::JointState>("/dvrk/PSM2/position_joint_desired", 1, true);
 		publisher_ready = true;
 	}
 }
@@ -55,22 +40,27 @@ bool davinci_interface::publish_joints(const double input[14]){
 	if(!publisher_ready){
 		return false;
 	}
-	std::vector<std::vector<double> > expanded_joints = expand_joint_list(input);
-	std_msgs::Float64 messages[2][13];
-	for(int i = 0; i < 2; i++){
-		for(int j = 0; j < 13; j++){
-			messages[i][j].data = expanded_joints[i][j];
-			joint_publishers[i][j].publish(messages[i][j]);
-		}
+	
+	sensor_msgs::JointState psm_1_msg;
+	sensor_msgs::JointState psm_2_msg;
+	for(int i = 0; i < 7; i++){
+		psm_1_msg.position.push_back(input[i + 7]);
+		psm_2_msg.position.push_back(input[i]);
 	}
+	
+	joint_publisher_1.publish(psm_1_msg);
+	joint_publisher_2.publish(psm_2_msg);
+	
 	return true;
 }
 
 void davinci_interface::init_joint_feedback(ros::NodeHandle & nh){
 	if(!subscriber_ready){
-		ros::Subscriber robot_state_sub = nh.subscribe("/dvrk/joint_states", 10, CB_update);
+		ros::Subscriber robot_state_sub_1 = nh.subscribe("/dvrk/PSM1/joint_states", 10, CB_update_1);
+		ros::Subscriber robot_state_sub_2 = nh.subscribe("/dvrk/PSM2/joint_states", 10, CB_update_2);
 		subscriber_ready = true;
-		fresh_pos = false;
+		fresh_pos_1 = false;
+		fresh_pos_2 = false;
 	}
 }
 
@@ -79,8 +69,9 @@ bool davinci_interface::get_fresh_robot_pos(std::vector<std::vector<double> > & 
 		return false;
 	}
 	
-	fresh_pos = false;
-	while(!fresh_pos){
+	fresh_pos_1 = false;
+	fresh_pos_2 = false;
+	while(!fresh_pos_1 && fresh_pos_2){
 		ros::spinOnce();
 		ros::Duration(0.01).sleep();
 	}
@@ -91,8 +82,8 @@ bool davinci_interface::get_fresh_robot_pos(std::vector<std::vector<double> > & 
 	
 	//Read the robopositions
 	for(int i = 0; i < 13; i++){
-		Davinci_fwd_solver::get_jnt_val_by_name("two_" + INPUT_JOINT_NAMES[i], states, output[0][i]);
-		Davinci_fwd_solver::get_jnt_val_by_name("one_" + INPUT_JOINT_NAMES[i], states, output[1][i]);
+		Davinci_fwd_solver::get_jnt_val_by_name(INPUT_JOINT_NAMES[i], states_1, output[0][i]);
+		Davinci_fwd_solver::get_jnt_val_by_name(INPUT_JOINT_NAMES[i], states_2, output[1][i]);
 	}
 	
 	/*ROS_INFO("Arm one is at: ");
@@ -104,7 +95,7 @@ bool davinci_interface::get_fresh_robot_pos(std::vector<std::vector<double> > & 
 }
 
 bool davinci_interface::get_last_robot_pos(std::vector<std::vector<double> > & output){
-	if(!subscriber_ready || !fresh_pos){
+	if(!subscriber_ready || !(fresh_pos_1 && fresh_pos_2)){
 		return false;
 	}
 	
@@ -115,50 +106,24 @@ bool davinci_interface::get_last_robot_pos(std::vector<std::vector<double> > & o
 	
 	//Read the robopositions
 	for(int i = 0; i < 13; i++){
-		Davinci_fwd_solver::get_jnt_val_by_name("two_" + INPUT_JOINT_NAMES[i], states, output[0][i]);
-		Davinci_fwd_solver::get_jnt_val_by_name("one_" + INPUT_JOINT_NAMES[i], states, output[1][i]);
+		Davinci_fwd_solver::get_jnt_val_by_name(INPUT_JOINT_NAMES[i], states_1, output[0][i]);
+		Davinci_fwd_solver::get_jnt_val_by_name(INPUT_JOINT_NAMES[i], states_2, output[1][i]);
 	}
 	
-	fresh_pos = false;
+	fresh_pos_1 = false;
+	fresh_pos_1 = false;
 	
 	return true;
 }
 
-void CB_update(const sensor_msgs::JointState::ConstPtr& incoming){
-	fresh_pos = true;
-	states = *incoming;
+void CB_update_1(const sensor_msgs::JointState::ConstPtr& incoming){
+	fresh_pos_1 = true;
+	states_1 = *incoming;
 	return;
 }
 
-std::vector<std::vector<double> > expand_joint_list(const double input[14]){
-	std::vector<std::vector<double> > njl;
-	njl.resize(2);
-	njl[0].resize(13);
-	njl[1].resize(13);
-	
-	for(int i = 0; i < 2; i++){
-		int offset = i * 7;
-		njl[i][0] = input[0 + offset];//joint1_position_controller
- 
-		njl[i][1] = input[1 + offset];//joint2_position_controller
-		njl[i][2] = input[1 + offset];//joint2_1_position_controller
-		njl[i][3] = input[1 + offset];//joint2_2_position_controller
-		njl[i][6] = input[1 + offset];//joint2_5_position_controller 
-
-		njl[i][4] = -input[1 + offset];//joint2_3_position_controller 
-		njl[i][5] = -input[1 + offset];//joint2_4_position_controller
-		
-		njl[i][7] = input[2 + offset];//joint3_position_controller
-
-		njl[i][8] = input[3 + offset];//joint4_position_controller
-
-		njl[i][9] = input[4 + offset];//joint5_position_controller
-
-		njl[i][10] = input[5 + offset];//joint6_position_controller
-
-		njl[i][11] = input[6 + offset];//joint7_position_controller
-		njl[i][12] = -input[6 + offset];//joint7_position_controller_mimic
-	}
-    
-	return njl;
+void CB_update_2(const sensor_msgs::JointState::ConstPtr& incoming){
+	fresh_pos_2 = true;
+	states_2 = *incoming;
+	return;
 }

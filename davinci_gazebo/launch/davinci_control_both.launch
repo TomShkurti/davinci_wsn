@@ -34,6 +34,10 @@
 					  two_joint7_position_controller
 					  two_joint7_position_controller_mimic"/>
 					  
+	<!-- add the translators-->
+	<node name="adapter_input" pkg="davinci_gazebo" type="adapter_input" respawn="false" output="screen"/>
+	<node name="adapter_output" pkg="davinci_gazebo" type="adapter_output" respawn="false" output="screen"/>
+					  
   <!-- convert joint states to TF transforms for rviz, etc -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
 	respawn="false" output="screen">
