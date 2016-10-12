@@ -2,7 +2,7 @@
 <robot name="dvrk_psm" xmlns:xacro="http://www.ros.org/wiki/xacro">
  
 	<!-- This file contains different tool urdf -->
-	<xacro:include filename="$(find dvrk_model)/model/common.urdf.xacro"/>
+	<xacro:include filename="$(find davinci_gazebo)/model/common.urdf.xacro"/>
 	
 	<!-- TOM: pretty sure this does not actually, if you want to get technical about it, DO anything.-->
 	<!--xacro:property name="GazeboRed"       value="1 0 0 1"/>
@@ -27,7 +27,7 @@
 				<!--<origin rpy="0 3.1416 0" xyz="0 0 0"/> -->
 				<origin rpy="1.5708 3.1416 0" xyz="0.0051 0.0032 0"/>
 				<geometry>
-					<mesh filename="package://dvrk_model/meshes/psm/tool_wrist_sca_link.dae"/> 
+					<mesh filename="package://davinci_gazebo/meshes/psm/tool_wrist_sca_link.dae"/> 
 				</geometry>
 			</visual>
 			<collision>
@@ -35,7 +35,7 @@
 				<geometry>
 					<!-- coarse model; a simple box -->
 					<!--box size="0.05 0.2 0.05"/-->
-					<mesh filename="package://dvrk_model/meshes/psm/tool_wrist_sca_link.dae"/> 
+					<mesh filename="package://davinci_gazebo/meshes/psm/tool_wrist_sca_link.dae"/> 
 				</geometry>
 			</collision>
 			<selfCollide>false</selfCollide>
@@ -61,7 +61,7 @@
 			<visual>
 				<origin rpy="0 0 0" xyz="0 -0.0002 -0.0025"/>
 				<geometry>
-					<mesh filename="package://dvrk_model/meshes/psm/tool_wrist_sca_shaft_link.dae"/> 
+					<mesh filename="package://davinci_gazebo/meshes/psm/tool_wrist_sca_shaft_link.dae"/> 
 				</geometry>
 			</visual>
 			<inertial>
@@ -85,7 +85,7 @@
 			<visual>
 				<origin rpy="0 0 0" xyz="0 0 0"/>
 				<geometry>
-					<mesh filename="package://dvrk_model/meshes/psm/tool_wrist_sca_link_2.dae"/>
+					<mesh filename="package://davinci_gazebo/meshes/psm/tool_wrist_sca_link_2.dae"/>
 				</geometry>
 			</visual>
   	
@@ -111,7 +111,7 @@
 			<visual>
 				<origin rpy="0 3.1516 0" xyz="0 0 0"/>
 				<geometry>
-					<mesh filename="package://dvrk_model/meshes/psm/tool_wrist_sca_link_2.dae"/>
+					<mesh filename="package://davinci_gazebo/meshes/psm/tool_wrist_sca_link_2.dae"/>
 				</geometry>
 			</visual>
 	

@@ -4,6 +4,11 @@
 
 #include <davinci_kinematics/davinci_kinematics.h>
 
+//Takes in a status update in the simulator format
+//(a singe fourteen-unit-long sensor_msgs/JointState message, containing both PSMs)
+//and reformats it to work with the individual controller topics you would get from the real DaVinci.
+//Don't mess with this unless you are changing something in the simulator itself.
+
 const std::string INPUT_JOINT_NAMES[7] = {
 	"outer_yaw"			,
 	"outer_pitch"			,

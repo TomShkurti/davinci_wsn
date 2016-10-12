@@ -63,7 +63,7 @@ int main(int argc, char **argv) {
 	ROS_INFO("Ready to start capturing- enter '1' to begin.");
 	char ans = '0';
 	while(ans != '1'){
-		cin >> ans;
+		std::cin >> ans;
 	}
 	
 	std::vector<std::vector<double> > mrp;

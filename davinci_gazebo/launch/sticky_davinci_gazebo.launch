@@ -9,7 +9,7 @@
   <arg name="debug" default="false"/>
 
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
-  <include file="$(find dvrk_model)/launch/empty_world.launch">
+  <include file="$(find davinci_gazebo)/launch/empty_world.launch">
     <arg name="world_name" value="$(find davinci_gazebo)/world/sticky_davinci.world"/>
     <arg name="debug" value="$(arg debug)" />
     <arg name="gui" value="$(arg gui)" />
@@ -24,6 +24,7 @@
 <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model davinci" />
 
 <!-- ros_control launch file -->
+<!-- Be sure to include this in any launchfiles you make where DaVinci needs to interface with ROS -->
   <include file="$(find davinci_gazebo)/launch/davinci_control_both.launch">
 </include>
 

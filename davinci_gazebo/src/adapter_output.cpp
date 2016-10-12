@@ -106,8 +106,8 @@ int main(int argc, char** argv){
 	}
 	
 	//Initialize the user-facing subscribers
-	ros::Subscriber sub_1 = nh.subscribe("/dvrk/PSM1/position_joint_desired", 1, CB_psm1);
-	ros::Subscriber sub_2 = nh.subscribe("/dvrk/PSM2/position_joint_desired", 1, CB_psm2);
+	ros::Subscriber sub_1 = nh.subscribe("/dvrk/PSM1/set_position_joint", 1, CB_psm1);
+	ros::Subscriber sub_2 = nh.subscribe("/dvrk/PSM2/set_position_joint", 1, CB_psm2);
 	
 	//Testing in the field, ros::spin() does not seem to have the problem that ros::spinOnce() in a while loop does
 	//where it sucked up massive amounts of CPU in order to do nothing extremely quickly.
