@@ -62,7 +62,7 @@ int main(int argc, char **argv) {
 	
 	ROS_INFO("Ready to start capturing- enter '1' to begin.");
 	char ans = '0';
-	while(ans != '1'){
+	while(ans != '1' && ros::ok()){
 		std::cin >> ans;
 	}
 	
@@ -72,6 +72,8 @@ int main(int argc, char **argv) {
 	
 	ros::spinOnce();
 	
+	ROS_INFO("Recording. Press Ctrl-C to end.");
+	
 	double total_time = 0.0;
 	while(ros::ok() && (CAPTURE_TIME == -1.0 || total_time < CAPTURE_TIME)){
 		ros::Duration sl(CAPTURE_FREQ);
@@ -79,6 +81,7 @@ int main(int argc, char **argv) {
 		total_time = total_time + CAPTURE_FREQ;
 		
 		if(get_last_robot_pos(mrp)){
+			outfile << "\n";
 			write_record(mrp, total_time, outfile);
 		}
 		
